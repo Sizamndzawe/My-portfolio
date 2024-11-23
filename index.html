@@ -152,34 +152,6 @@
       </div>
     </div>
   </footer>
-  <script>
-  const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('scroll-visible');
-    } else {
-      entry.target.classList.remove('scroll-visible');
-    }
-  });
-});
-
-document.querySelectorAll('.scroll-hidden').forEach((el) => observer.observe(el));
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('section');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.2 });
-
-      sections.forEach(section => {
-        section.classList.add('hidden');
-        observer.observe(section);
-      });
-    });
-  </script>
   <script src="main.js"></script>
 </body>
 
