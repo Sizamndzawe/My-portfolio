@@ -6,198 +6,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do List Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
     /* Include your CSS here */
     :root {
       --background-color: #ffffff;
       --text-color: #161B4B;
-    }/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    }
 
-:root {
-  --primary-color: #6169C9;
-  --secondary-color: #E8EAF6;
-  --background-color: #F9F9F9;
-  --text-color: #333333;
-  --header-bg: #161B4B;
-  --footer-bg: #161B4B;
-  --button-hover: #4A52B8;
-}
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* Body */
-body {
-  font-family: 'Poppins', Arial, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
-  margin: 0;
-}
+    :root {
+      --primary-color: #6169C9;
+      --secondary-color: #E8EAF6;
+      --background-color: #F9F9F9;
+      --text-color: #333333;
+      --header-bg: #161B4B;
+      --footer-bg: #161B4B;
+      --button-hover: #4A52B8;
+    }
 
-/* Header */
-header {
-  background-color: var(--header-bg);
-  color: white;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+    /* Body */
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      margin: 0;
+    }
 
-header .logo a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
+    /* Header */
 
-header .nav-links {
-  list-style: none;
-  display: flex;
-}
+    main {
+      padding: 20px;
+    }
 
-header .nav-links li {
-  margin: 0 15px;
-}
+    section {
+      padding: 30px 20px;
+      margin-bottom: 30px;
+    }
 
-header .nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
+    section h4,
+    section h5,
+    section h6 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
 
-header .nav-links a:hover {
-  color: var(--secondary-color);
-}
+    section p {
+      margin-bottom: 20px;
+    }
 
-.menu-toggle {
-  display: none;
-}
+    /* Intro Section */
+    .intro {
+      text-align: center;
+    }
 
-/* Main Sections */
-main {
-  padding: 20px;
-}
+    .intro h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
 
-section {
-  padding: 30px 20px;
-  margin-bottom: 30px;
-}
+    .intro a.download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
 
-section h4, section h5, section h6 {
-  color: var(--primary-color);
-  margin-bottom: 15px;
-}
+    .intro a.download-btn:hover {
+      background-color: var(--button-hover);
+    }
 
-section p {
-  margin-bottom: 20px;
-}
+    /* Code Section */
+    #code .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-/* Intro Section */
-.intro {
-  text-align: center;
-}
+    .project-card {
+      background-color: white;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+      flex: 1 1 calc(33.333% - 20px);
+      min-width: 300px;
+    }
 
-.intro h2 {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 20px;
-}
+    .project-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
 
-.intro a.download-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: var(--primary-color);
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-top: 15px;
-  transition: background-color 0.3s;
-}
+    .project-card pre {
+      background-color: var(--secondary-color);
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      color: #444;
+    }
 
-.intro a.download-btn:hover {
-  background-color: var(--button-hover);
-}
+    code {
+      font-family: 'Courier New', monospace;
+      line-height: 1.5;
+    }
 
-/* Code Section */
-#code .projects-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.project-card {
-  background-color: white;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 20px;
-  flex: 1 1 calc(33.333% - 20px);
-  min-width: 300px;
-}
-
-.project-card h4 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.project-card pre {
-  background-color: var(--secondary-color);
-  padding: 15px;
-  border-radius: 5px;
-  overflow-x: auto;
-  font-size: 0.9rem;
-  color: #444;
-}
-
-code {
-  font-family: 'Courier New', monospace;
-  line-height: 1.5;
-}
-
-/* Contact Section */
-form {
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-form input, form textarea, form button {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-form button {
-  background-color: var(--primary-color);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-form button:hover {
-  background-color: var(--button-hover);
-}
-
-/* Footer */
-footer {
-  background-color: var(--footer-bg);
-  color: white;
-  text-align: center;
-  padding: 15px 20px;
-}
-
-footer p {
-  font-size: 0.9rem;
-}
 
     /* Add all the provided CSS rules here */
   </style>
@@ -208,13 +133,15 @@ footer p {
     <div class="logo">
       <a href="#">To-Do List</a>
     </div>
+    <nav>
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#code">Code</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="menu-toggle">
+    </nav>
+    <div class="menu-toggle" id="menu-toggle">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
@@ -340,6 +267,7 @@ document.getElementById("add-task").addEventListener("click", function () {
       <p>&copy; 2024 Siza Mndzawe. All rights reserved.</p>
     </div>
   </footer>
+  <script src="main.js"></script>
 </body>
 
-</html>
+      </html>
