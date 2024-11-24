@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Include your CSS here */
+    :root {
+      --background-color: #ffffff;
+      --text-color: #161B4B;
+    }/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #6169C9;
+  --secondary-color: #E8EAF6;
+  --background-color: #F9F9F9;
+  --text-color: #333333;
+  --header-bg: #161B4B;
+  --footer-bg: #161B4B;
+  --button-hover: #4A52B8;
+}
+
+/* Body */
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Header */
+header {
+  background-color: var(--header-bg);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+header .nav-links {
+  list-style: none;
+  display: flex;
+}
+
+header .nav-links li {
+  margin: 0 15px;
+}
+
+header .nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+header .nav-links a:hover {
+  color: var(--secondary-color);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Main Sections */
+main {
+  padding: 20px;
+}
+
+section {
+  padding: 30px 20px;
+  margin-bottom: 30px;
+}
+
+section h4, section h5, section h6 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+section p {
+  margin-bottom: 20px;
+}
+
+/* Intro Section */
+.intro {
+  text-align: center;
+}
+
+.intro h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.intro a.download-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.intro a.download-btn:hover {
+  background-color: var(--button-hover);
+}
+
+/* Code Section */
+#code .projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.project-card {
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1 1 calc(33.333% - 20px);
+  min-width: 300px;
+}
+
+.project-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.project-card pre {
+  background-color: var(--secondary-color);
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+/* Contact Section */
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+form input, form textarea, form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: var(--button-hover);
+}
+
+/* Footer */
+footer {
+  background-color: var(--footer-bg);
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+}
+
+footer p {
+  font-size: 0.9rem;
+}
+
+    /* Add all the provided CSS rules here */
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="#">To-Do List</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#code">Code</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="menu-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </header>
+
+  <main>
+    <section id="home">
+      <div class="intro">
+        <h2>Welcome to the To-Do List Project</h2>
+        <p>This project is a simple To-Do List application that helps you stay organized. Built with HTML, CSS, and JavaScript, it’s intuitive and fully responsive!</p>
+        <a class="download-btn" href="https://github.com/username/todo-list" target="_blank">View on GitHub</a>
+      </div>
+      <img src="https://via.placeholder.com/300x400" alt="To-Do List App Preview">
+    </section>
+
+    <section id="about">
+      <h5>About This Project</h5>
+      <p>The To-Do List app includes features like adding, editing, and deleting tasks, along with a dark mode toggle for a seamless user experience.</p>
+    </section>
+
+    <section id="code">
+      <h4>To-Do List Code</h4>
+      <div class="projects-container">
+        <!-- HTML Code -->
+        <div class="project-card">
+          <h4>HTML Code</h4>
+          <pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;To-Do List&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="app"&gt;
+    &lt;h1&gt;To-Do List&lt;/h1&gt;
+    &lt;input type="text" id="new-task" placeholder="Add a task" /&gt;
+    &lt;button id="add-task"&gt;Add&lt;/button&gt;
+    &lt;ul id="task-list"&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+          </pre>
+        </div>
+
+        <!-- CSS Code -->
+        <div class="project-card">
+          <h4>CSS Code</h4>
+          <pre>
+<code>
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+}
+#app {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+#new-task {
+  width: 70%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+#add-task {
+  padding: 10px 15px;
+  background-color: #6169C9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+#task-list {
+  list-style: none;
+  padding: 0;
+}
+#task-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+</code>
+          </pre>
+        </div>
+
+        <!-- JavaScript Code -->
+        <div class="project-card">
+          <h4>JavaScript Code</h4>
+          <pre>
+<code>
+document.getElementById("add-task").addEventListener("click", function () {
+  const taskInput = document.getElementById("new-task");
+  const taskList = document.getElementById("task-list");
+  if (taskInput.value.trim() !== "") {
+    const li = document.createElement("li");
+    li.textContent = taskInput.value;
+    taskList.appendChild(li);
+    taskInput.value = ""; // Clear input
+  }
+});
+</code>
+          </pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h6>Contact</h6>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2024 Siza Mndzawe. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
