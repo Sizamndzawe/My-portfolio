@@ -56,11 +56,15 @@
     section h6 {
       color: var(--primary-color);
       margin-bottom: 15px;
+      text-align: center;
     }
 
     section p {
       margin-bottom: 20px;
+      
     }
+    
+    
 
     /* Intro Section */
     .intro {
@@ -93,6 +97,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
+      
     }
 
     .project-card {
@@ -101,7 +106,8 @@
       border-radius: 8px;
       padding: 20px;
       flex: 1 1 calc(33.333% - 20px);
-      min-width: 300px;
+      width: 100%;
+      max-width: 800px;
     }
 
     .project-card h4 {
@@ -122,6 +128,7 @@
       font-family: 'Courier New', monospace;
       line-height: 1.5;
     }
+    
 
 
     /* Add all the provided CSS rules here */
@@ -130,22 +137,7 @@
 
 <body>
   <header>
-    <div class="logo">
-      <a href="#">To-Do List</a>
-    </div>
-    <nav>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#code">Code</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    </nav>
-    <div class="menu-toggle" id="menu-toggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
+    <a href="index.html">back to homepage</a>
   </header>
 
   <main>
@@ -270,4 +262,4 @@ document.getElementById("add-task").addEventListener("click", function () {
   <script src="main.js"></script>
 </body>
 
-      </html>
+</html>
