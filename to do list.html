@@ -27,6 +27,8 @@
     .todo-input {
       display: flex;
       margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .todo-input input {
@@ -42,8 +44,9 @@
       background-color: skyblue;
       color: white;
       border: none;
-      border-radius: 0 5px 5px 0;
+      border-radius: 20px;
       cursor: pointer;
+      flex-grow: 1;
     }
 
     .todo-list {
@@ -59,6 +62,9 @@
       padding: 10px;
       margin-bottom: 10px;
       border-radius: 5px;
+    }
+    .todo-item:hover{
+      background: ghostwhite;
     }
 
     .todo-item.completed {
@@ -175,4 +181,4 @@
   </script>
 </body>
 
-</html>
+  </html>
