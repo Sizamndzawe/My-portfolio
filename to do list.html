@@ -1,184 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do List</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern To-Do List</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #f4f4f4;
+            --bg-dark: #333;
+            --card-light: white;
+            --card-dark: #444;
+            --text-light: black;
+            --text-dark: white;
+            --primary-color: #4a90e2;
+            --secondary-color: #6c757d;
+        }
 
-  <style>
-    body {
-      font-family: 'Poppins', Arial, sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-light);
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
 
-    .todo-container {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-    }
+        .todo-container {
+            background-color: var(--card-light);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            overflow: hidden;
+            
+        }
 
-    .todo-input {
-      display: flex;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-    .todo-input input {
-      flex-grow: 1;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 5px 0 0 5px;
-    }
+        .header h1 {
+            color: var(--primary-color);
+        }
 
-    .todo-input button {
-      padding: 10px 15px;
-      background-color: skyblue;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      flex-grow: 1;
-    }
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: transform 0.2s;
+        }
 
-    .todo-list {
-      list-style-type: none;
-      padding: 0;
-    }
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
 
-    .todo-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f9f9f9;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-    }
-    .todo-item:hover{
-      background: ghostwhite;
-    }
+        .todo-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
 
-    .todo-item.completed {
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
+        .todo-input input, 
+        .todo-input select {
+            flex-grow: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
 
-    .delete-btn {
-      background-color: #f44336;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-  </style>
+        .todo-input button {
+            padding: 12px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .todo-input button:hover {
+            background-color: #3a7bd5;
+        }
+
+        .todo-list {
+            list-style-type: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .todo-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .todo-item-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .complete-btn {
+            color: green;
+        }
+
+        .complete-btn:hover {
+            color: darkgreen;
+        }
+
+        .edit-btn {
+            color: orange;
+        }
+
+        .edit-btn:hover {
+            color: darkorange;
+        }
+
+        .delete-btn {
+            color: red;
+        }
+
+        .delete-btn:hover {
+            color: darkred;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .priority-low { border-left: 5px solid green; }
+        .priority-medium { border-left: 5px solid orange; }
+        .priority-high { border-left: 5px solid red; }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        body.dark-mode .todo-container {
+            background-color: var(--card-dark);
+        }
+
+        body.dark-mode .todo-item {
+            background-color: #555;
+            color: white;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* Scrollbar Styling */
+        .todo-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .todo-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+    </style>
 </head>
-
 <body>
-  <div class="todo-container">
-    <h1>To-Do List</h1>
-    <div class="todo-input">
-      <input type="text" id="taskInput" placeholder="Enter a new task">
-      <button onclick="addTask()">Add Task</button>
+    <div class="todo-container">
+        <div class="header">
+            <h1>
+                <i class="fas fa-tasks"></i> To-Do List
+            </h1>
+            <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-adjust"></i>
+            </button>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="🔍 Search tasks" onkeyup="filterTasks()">
+
+        <div class="todo-input">
+            <input type="text" id="taskInput" placeholder="Enter a new task">
+            <select id="taskCategory">
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Study">Study</option>
+                <option value="Others">Others</option>
+            </select>
+            <select id="taskPriority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+            <button onclick="addTask()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <ul id="todoList" class="todo-list"></ul>
     </div>
-    <ul id="todoList" class="todo-list"></ul>
-  </div>
 
-  <script>
-    // Select DOM elements
-    const taskInput = document.getElementById('taskInput');
-    const todoList = document.getElementById('todoList');
+    <script>
+        // DOM Elements
+        const taskInput = document.getElementById('taskInput');
+        const taskCategory = document.getElementById('taskCategory');
+        const taskPriority = document.getElementById('taskPriority');
+        const todoList = document.getElementById('todoList');
+        const themeToggle = document.getElementById('themeToggle');
 
-    // Load tasks from localStorage on page load
-    document.addEventListener('DOMContentLoaded', loadTasks);
+        // Load tasks and theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTasks();
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
 
-    // Function to add a new task
-    function addTask() {
-      const taskText = taskInput.value.trim();
+        // Add a new task
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            const category = taskCategory.value;
+            const priority = taskPriority.value;
 
-      if (taskText === '') {
-        alert('Please enter a task');
-        return;
-      }
+            if (taskText === '') {
+                alert('Please enter a task');
+                return;
+            }
 
-      // Create task item
-      const li = document.createElement('li');
-      li.className = 'todo-item';
-      li.innerHTML = `
-                <span>${taskText}</span>
-                <div>
-                    <button onclick="toggleComplete(this)">✓</button>
-                    <button class="delete-btn" onclick="deleteTask(this)">✗</button>
+            const li = document.createElement('li');
+            li.className = `todo-item priority-${priority.toLowerCase()}`;
+            li.innerHTML = `
+                <span>
+                    ${taskText} 
+                    <small><i class="fas fa-tag"></i> ${category} 
+                    [${priority} Priority]</small>
+                </span>
+                <div class="todo-item-actions">
+                    <button class="complete-btn" onclick="toggleComplete(this)">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                    <button class="edit-btn" onclick="editTask(this)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="delete-btn" onclick="deleteTask(this)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </div>
             `;
 
-      // Add to list and clear input
-      todoList.appendChild(li);
-      taskInput.value = '';
+            todoList.appendChild(li);
+            taskInput.value = '';
+            saveTasks();
+        }
 
-      // Save tasks to localStorage
-      saveTasks();
-    }
+        // Toggle task completion
+        function toggleComplete(button) {
+            const todoItem = button.closest('.todo-item');
+            todoItem.classList.toggle('completed');
+            button.querySelector('i').classList.toggle('fa-check-circle');
+            button.querySelector('i').classList.toggle('fa-undo');
+            saveTasks();
+        }
 
-    // Function to toggle task completion
-    function toggleComplete(button) {
-      const todoItem = button.closest('.todo-item');
-      todoItem.classList.toggle('completed');
-      saveTasks();
-    }
+        // Edit a task
+        function editTask(button) {
+            const todoItem = button.closest('.todo-item');
+            const taskSpan = todoItem.querySelector('span');
+            const currentText = taskSpan.childNodes[0].textContent.trim();
+            const newTaskText = prompt('Edit your task:', currentText);
 
-    // Function to delete a task
-    function deleteTask(button) {
-      const todoItem = button.closest('.todo-item');
-      todoItem.remove();
-      saveTasks();
-    }
+            if (newTaskText !== null && newTaskText.trim() !== '') {
+                taskSpan.childNodes[0].textContent = newTaskText.trim();
+                saveTasks();
+            }
+        }
 
-    // Function to save tasks to localStorage
-    function saveTasks() {
-      const tasks = [];
-      document.querySelectorAll('#todoList .todo-item').forEach(item => {
-        tasks.push({
-          text: item.querySelector('span').textContent,
-          completed: item.classList.contains('completed')
-        });
-      });
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+        // Delete a task
+        function deleteTask(button) {
+            const todoItem = button.closest('.todo-item');
+            todoItem.remove();
+            saveTasks();
+        }
 
-    // Function to load tasks from localStorage
-    function loadTasks() {
-      const savedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-      savedTasks.forEach(task => {
-        const li = document.createElement('li');
-        li.className = 'todo-item' + (task.completed ? ' completed' : '');
-        li.innerHTML = `
-                    <span>${task.text}</span>
-                    <div>
-                        <button onclick="toggleComplete(this)">✓</button>
-                        <button class="delete-btn" onclick="deleteTask(this)">✗</button>
+        // Save tasks to localStorage
+        function saveTasks() {
+            const tasks = [];
+            document.querySelectorAll('#todoList .todo-item').forEach(item => {
+                tasks.push({
+                    text: item.querySelector('span').childNodes[0].textContent.trim(),
+                    category: item.querySelector('small').textContent,
+                    priority: item.className.split(' ').find(c => c.startsWith('priority-'))?.split('-')[1],
+                    completed: item.classList.contains('completed')
+                });
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Load tasks from localStorage
+        function loadTasks() {
+            const savedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+            savedTasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = `todo-item priority-${task.priority} ${task.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <span>
+                        ${task.text} 
+                        <small><i class="fas fa-tag"></i> ${task.category}</small>
+                    </span>
+                    <div class="todo-item-actions">
+                        <button class="complete-btn" onclick="toggleComplete(this)">
+                            <i class="fas fa-${task.completed ? 'undo' : 'check-circle'}"></i>
+                        </button>
+                        <button class="edit-btn" onclick="editTask(this)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn" onclick="deleteTask(this)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
                 `;
-        todoList.appendChild(li);
-      });
-    }
+                todoList.appendChild(li);
+            });
+        }
 
-    // Add event listener for Enter key in input
-    taskInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        addTask();
-      }
-    });
-  </script>
+        // Filter tasks
+        function filterTasks() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('#todoList .todo-item').forEach(item => {
+                const taskText = item.querySelector('span').textContent.toLowerCase();
+                item.style.display = taskText.includes(searchInput) ? '' : 'none';
+            });
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            // Change theme toggle icon
+            themeToggle.innerHTML = isDarkMode 
+                ? '<i class="fas fa-sun"></i>' 
+                : '<i class="fas fa-adjust"></i>';
+        }
+
+        // Add task on Enter key press
+        taskInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+    </script>
 </body>
-
   </html>
