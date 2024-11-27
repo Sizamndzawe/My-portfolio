@@ -145,6 +145,8 @@
 
      margin: 0;
      padding: 0;
+     width: 100%;
+     
    }
 
    .dark-mode-toggle {
@@ -262,22 +264,32 @@
    #projects h4 {
      font-size: 25px;
    }
+   #skills .wrapper{
+     width: 100%;
+     overflow: auto;
+     
+     
+   }
 
    .skills-container {
      display: flex;
-     flex-wrap: wrap;
-     gap: 20px;
-     justify-content: center;
+     flex-wrap: nowrap;
+     gap: 10px;
+     justify-content: flex-start;
+     max-width: 100%;
      margin-top: 20px;
+     overflow: auto;
+     padding: 20px;
+     
    }
 
    .skills-card {
      text-align: center;
      padding: 15px;
-     width: 200px;
+    min-width: 100%;
      /*  background-color: #f9f9f9;*/
      border-radius: 10px;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
    }
 
    .skills-card:hover {
