@@ -164,7 +164,8 @@
 
    /* Dark mode styles */
    body.dark-mode {
-     --background-color: #0A0E23;
+     --background-color: #0A0E10;
+   /*  --background-color: #0A0E23;*/
      --text-color: #F2F3FF;
    }
 
