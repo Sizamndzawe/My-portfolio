@@ -166,7 +166,7 @@
    body.dark-mode {
      --background-color: #555;
    /*  --background-color: #0A0E23;*/
-     --text-color: #F2F3FF;
+     --text-color: #fff;
    }
 
    /* Optional: Dark mode toggle button when dark mode is active */
