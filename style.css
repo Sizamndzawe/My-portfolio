@@ -1,6 +1,6 @@
    :root {
      --background-color: #fff;
-     --text-color: #161B4B;
+     --text-color: #222;
    }
 
    * {
@@ -146,7 +146,7 @@
      margin: 0;
      padding: 0;
      width: 100%;
-     
+
    }
 
    .dark-mode-toggle {
@@ -167,7 +167,7 @@
    /* Dark mode styles */
    body.dark-mode {
      --background-color: #0A0E23;
-   /*  --background-color: #0A0E23;*/
+     /*  --background-color: #0A0E23;*/
      --text-color: #fff;
    }
 
@@ -264,11 +264,12 @@
    #projects h4 {
      font-size: 25px;
    }
-   #skills .wrapper{
+
+   #skills .wrapper {
      width: 100%;
      overflow: auto;
-     
-     
+
+
    }
 
    .skills-container {
@@ -280,15 +281,15 @@
      margin-top: 20px;
      overflow: auto;
      padding: 20px;
-     
+
    }
 
    .skills-card {
      text-align: center;
      padding: 15px;
-    
-    min-width: 200px;
-    
+
+     min-width: 200px;
+
      /*  background-color: #f9f9f9;*/
      border-radius: 10px;
      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -314,7 +315,7 @@
 
    .skills-card p {
      font-size: 0.9em;
-     color: #555;
+     color: var(--text-color);
    }
 
    .projects-container {
