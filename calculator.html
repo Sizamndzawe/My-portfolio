@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .calculator {
+            display: grid;
+            grid-template-rows: 1fr 4fr;
+            width: 400px;
+            height: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            background-color: white;
+        }
+
+        .calculator__display {
+            background-color: #666;
+            color: white;
+            font-size: 2.5em;
+            text-align: right;
+            padding: 20px;
+            
+        }
+
+        .calculator__keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
+        }
+
+        button {
+            font-size: 1.5em;
+            padding: 20px;
+            border: none;
+            border-radius: 100px;
+            background-color: #f4f4f4;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        .key--operator {
+            background-color: #ff9500;
+            color: white;
+        }
+
+        button[data-action="clear"] {
+            background-color: #ff3b30;
+            color: white;
+        }
+
+        button[data-action="calculate"] {
+            background-color: #4cd964;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="calculator">
+        <div id="display" class="calculator__display">0</div>
+        <div class="calculator__keys">
+            <button class="key--operator" data-action="add">+</button>
+            <button class="key--operator" data-action="subtract">-</button>
+            <button class="key--operator" data-action="multiply">&times;</button>
+            <button class="key--operator" data-action="divide">÷</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>0</button>
+            <button>.</button>
+            <button data-action="clear">AC</button>
+            <button data-action="calculate">=</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculator = document.querySelector('.calculator');
+            const keys = calculator.querySelector('.calculator__keys');
+            const display = calculator.querySelector('.calculator__display');
+            let firstValue, operator, previousKeyType;
+
+            keys.addEventListener('click', event => {
+                if (!event.target.matches('button')) return;
+                const key = event.target;
+                const action = key.dataset.action;
+                const keyContent = key.textContent;
+                const displayedNum = display.textContent;
+                const previousKey = previousKeyType;
+                const previousKeyOperator = operator;
+
+                if (!action) {
+                    if (displayedNum === '0' || previousKey === 'operator' || previousKey === 'calculate') {
+                        display.textContent = keyContent;
+                    } else {
+                        display.textContent = displayedNum + keyContent;
+                    }
+                    previousKeyType = 'number';
+                }
+
+                if (action === 'add' || action === 'subtract' || action === 'multiply' || action === 'divide') {
+                    firstValue = displayedNum;
+                    operator = action;
+                    previousKeyType = 'operator';
+                }
+
+                if (action === 'calculate') {
+                    const secondValue = displayedNum;
+                    display.textContent = calculate(firstValue, operator, secondValue);
+                    previousKeyType = 'calculate';
+                }
+
+                if (action === 'clear') {
+                    display.textContent = '0';
+                    firstValue = null;
+                    operator = null;
+                    previousKeyType = null;
+                }
+            });
+
+            function calculate(n1, operator, n2) {
+                let result = '';
+                if (operator === 'add') result = parseFloat(n1) + parseFloat(n2);
+                if (operator === 'subtract') result = parseFloat(n1) - parseFloat(n2);
+                if (operator === 'multiply') result = parseFloat(n1) * parseFloat(n2);
+                if (operator === 'divide') result = parseFloat(n1) / parseFloat(n2);
+                return result;
+            }
+        });
+    </script>
+</body>
+</html>
