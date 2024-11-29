@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculator with History</title>
+  <title>Calculator with Popup History</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -80,19 +80,52 @@
     .buttons .delete:hover {
       background: #ff8c00;
     }
-    .history {
-      max-height: 150px;
-      overflow-y: auto;
-      border-top: 1px solid #ddd;
-      padding: 10px;
-      background: #f9f9f9;
-      font-size: 14px;
+    .history-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      z-index: 1000;
     }
-    .history p {
+    .history-popup h3 {
+      margin: 0 0 10px;
+    }
+    .history-popup p {
       margin: 5px 0;
       padding: 5px;
       background: #e8e8e8;
       border-radius: 5px;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    .history-button {
+      flex: 1 0 100%;
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .history-button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
@@ -122,14 +155,25 @@
       <button onclick="appendValue('.')">.</button>
       <button onclick="calculateResult()">=</button>
       <button onclick="appendValue('+')">+</button>
-    </div>
-    <div class="history" id="history">
-      <strong>History:</strong>
+      <button onclick="showHistory()" class="history-button">History</button>
     </div>
   </div>
+
+  <div class="overlay" id="overlay" onclick="closeHistory()"></div>
+  <div class="history-popup" id="history-popup">
+    <h3>Calculation History</h3>
+    <div id="history-content"></div>
+    <button onclick="closeHistory()" class="history-button">Close</button>
+  </div>
+
   <script>
     const resultInput = document.getElementById("result");
-    const historyDiv = document.getElementById("history");
+    const historyContent = document.getElementById("history-content");
+    const historyPopup = document.getElementById("history-popup");
+    const overlay = document.getElementById("overlay");
+
+    // Load history from localStorage
+    const history = JSON.parse(localStorage.getItem("calculatorHistory")) || [];
 
     function appendValue(value) {
       resultInput.value += value;
@@ -155,10 +199,20 @@
     }
 
     function addToHistory(expression, result) {
-      const historyEntry = document.createElement("p");
-      historyEntry.textContent = `${expression} = ${result}`;
-      historyDiv.appendChild(historyEntry);
-      historyDiv.scrollTop = historyDiv.scrollHeight; // Auto-scroll to the latest entry
+      const entry = `${expression} = ${result}`;
+      history.push(entry);
+      localStorage.setItem("calculatorHistory", JSON.stringify(history));
+    }
+
+    function showHistory() {
+      historyContent.innerHTML = history.map(entry => `<p>${entry}</p>`).join("");
+      historyPopup.style.display = "block";
+      overlay.style.display = "block";
+    }
+
+    function closeHistory() {
+      historyPopup.style.display = "none";
+      overlay.style.display = "none";
     }
   </script>
 </body>
