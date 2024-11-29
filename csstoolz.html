@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Tools</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <style>
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-container {
+            display: none;
+        }
+        
+        .tool-container.active {
+            display: block;
+        }
+
+        .color-input {
+            -webkit-appearance: none;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .color-input::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .color-input::-webkit-color-swatch {
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <i data-feather="box" class="h-8 w-8 text-indigo-600"></i>
+                    <span class="ml-2 text-xl font-semibold text-gray-900">CSS Tools</span>
+                </div>
+                <button id="homeButton" class="text-gray-500 hover:text-gray-700">
+                    <i data-feather="home"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Tools Grid -->
+        <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="tool-card bg-white p-6 rounded-lg shadow-sm transition-all duration-200 cursor-pointer" data-tool="boxShadow">
+                <div class="flex items-center mb-4">
+                    <i data-feather="square" class="h-6 w-6 text-indigo-600"></i>
+                    <h3 class="ml-2 text-lg font-medium text-gray-900">Box Shadow Generator</h3>
+                </div>
+                <p class="text-gray-600">Create and customize box shadows with real-time preview.</p>
+            </div>
+
+            <div class="tool-card bg-white p-6 rounded-lg shadow-sm transition-all duration-200 cursor-pointer" data-tool="gradient">
+                <div class="flex items-center mb-4">
+                    <i data-feather="droplet" class="h-6 w-6 text-indigo-600"></i>
+                    <h3 class="ml-2 text-lg font-medium text-gray-900">Gradient Generator</h3>
+                </div>
+                <p class="text-gray-600">Design beautiful color gradients with ease.</p>
+            </div>
+
+            <div class="tool-card bg-white p-6 rounded-lg shadow-sm transition-all duration-200 cursor-pointer" data-tool="flexbox">
+                <div class="flex items-center mb-4">
+                    <i data-feather="layout" class="h-6 w-6 text-indigo-600"></i>
+                    <h3 class="ml-2 text-lg font-medium text-gray-900">Flexbox Guide</h3>
+                </div>
+                <p class="text-gray-600">Interactive flexbox layout playground and generator.</p>
+            </div>
+
+            <div class="tool-card bg-white p-6 rounded-lg shadow-sm transition-all duration-200 cursor-pointer" data-tool="button">
+                <div class="flex items-center mb-4">
+                    <i data-feather="mouse-pointer" class="h-6 w-6 text-indigo-600"></i>
+                    <h3 class="ml-2 text-lg font-medium text-gray-900">Button Generator</h3>
+                </div>
+                <p class="text-gray-600">Create stylish buttons with custom designs.</p>
+            </div>
+        </div>
+
+        <!-- Tool Containers -->
+        <div id="toolContainers">
+            <!-- Box Shadow Generator -->
+            <div class="tool-container" id="boxShadow">
+                <h2 class="text-2xl font-semibold mb-6">Box Shadow Generator</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Horizontal Offset</label>
+                                <input type="range" min="-50" max="50" value="0" class="w-full" id="horizontal">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Vertical Offset</label>
+                                <input type="range" min="-50" max="50" value="0" class="w-full" id="vertical">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Blur Radius</label>
+                                <input type="range" min="0" max="100" value="10" class="w-full" id="blur">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Spread Radius</label>
+                                <input type="range" min="-50" max="50" value="0" class="w-full" id="spread">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Shadow Color</label>
+                                <input type="color" value="#000000" class="color-input" id="shadowColor">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="boxShadowPreview" class="w-32 h-32 bg-white rounded-lg mx-auto"></div>
+                        <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+                            <code id="boxShadowCode" class="text-sm"></code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gradient Generator -->
+            <div class="tool-container" id="gradient">
+                <h2 class="text-2xl font-semibold mb-6">Gradient Generator</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Color 1</label>
+                                <input type="color" value="#ff0000" class="color-input" id="color1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Color 2</label>
+                                <input type="color" value="#0000ff" class="color-input" id="color2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Angle</label>
+                                <input type="range" min="0" max="360" value="90" class="w-full" id="angle">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="gradientPreview" class="w-full h-32 rounded-lg"></div>
+                        <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+                            <code id="gradientCode" class="text-sm"></code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flexbox Guide -->
+            <div class="tool-container" id="flexbox">
+                <h2 class="text-2xl font-semibold mb-6">Flexbox Guide</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Justify Content</label>
+                                <select id="justifyContent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="flex-start">flex-start</option>
+                                    <option value="flex-end">flex-end</option>
+                                    <option value="center">center</option>
+                                    <option value="space-between">space-between</option>
+                                    <option value="space-around">space-around</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Align Items</label>
+                                <select id="alignItems" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="flex-start">flex-start</option>
+                                    <option value="flex-end">flex-end</option>
+                                    <option value="center">center</option>
+                                    <option value="stretch">stretch</option>
+                                    <option value="baseline">baseline</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="flexboxPreview" class="w-full h-48 bg-gray-100 rounded-lg p-4">
+                            <div class="flex w-full h-full bg-white rounded-lg p-2" id="flexContainer">
+                                <div class="w-16 h-16 bg-indigo-200 rounded-lg m-1"></div>
+                                <div class="w-16 h-16 bg-indigo-300 rounded-lg m-1"></div>
+                                <div class="w-16 h-16 bg-indigo-400 rounded-lg m-1"></div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+                            <code id="flexboxCode" class="text-sm"></code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button Generator -->
+            <div class="tool-container" id="button">
+                <h2 class="text-2xl font-semibold mb-6">Button Generator</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Background Color</label>
+                                <input type="color" value="#4F46E5" class="color-input" id="buttonBg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Text Color</label>
+                                <input type="color" value="#FFFFFF" class="color-input" id="buttonText">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Border Radius</label>
+                                <input type="range" min="0" max="24" value="6" class="w-full" id="buttonRadius">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Padding</label>
+                                <input type="range" min="4" max="24" value="12" class="w-full" id="buttonPadding">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="buttonPreview" class="mx-auto block">Button Preview</button>
+                        <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+                            <code id="buttonCode" class="text-sm"></code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Tools</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <style>
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-input {
+            -webkit-appearance: none;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .color-input::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .color-input::-webkit-color-swatch {
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <i data-feather="box" class="h-8 w-8 text-indigo-600"></i>
+                    <span class="ml-2 text-xl font-semibold text-gray-900">CSS Tools</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white p-10 rounded-lg shadow-lg">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-4">Welcome to CSS Tools</h1>
+                <p class="mb-6">Interactive tools to create stunning CSS effects effortlessly!</p>
+                <button id="exploreTools" class="bg-white text-blue-600 px-6 py-3 rounded-lg shadow-md hover:bg-gray-200">Explore Tools</button>
+            </div>
+        </section>
+
+        <!-- Interactive Section -->
+        <div id="interactiveSection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 hidden">
+            <!-- Box Shadow Generator -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold mb-4">Box Shadow</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Horizontal</label>
+                        <input type="range" min="-50" max="50" value="0" class="w-full" id="horizontal">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Vertical</label>
+                        <input type="range" min="-50" max="50" value="0" class="w-full" id="vertical">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Blur</label>
+                        <input type="range" min="0" max="100" value="10" class="w-full" id="blur">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Color</label>
+                        <input type="color" value="#000000" class="color-input" id="shadowColor">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div id="boxShadowPreview" class="w-16 h-16 bg-gray-200 mx-auto"></div>
+                    <code id="boxShadowCode" class="block mt-2 text-sm"></code>
+                </div>
+            </div>
+
+            <!-- Gradient Generator -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold mb-4">Gradient</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Color 1</label>
+                        <input type="color" value="#ff0000" class="color-input" id="color1">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Color 2</label>
+                        <input type="color" value="#0000ff" class="color-input" id="color2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Angle</label>
+                        <input type="range" min="0" max="360" value="90" class="w-full" id="angle">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div id="gradientPreview" class="w-full h-16 rounded-lg"></div>
+                    <code id="gradientCode" class="block mt-2 text-sm"></code>
+                </div>
+            </div>
+
+            <!-- Flexbox Guide -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold mb-4">Flexbox</h2>
+                <div class="space-y-4">
+                    <label class="block text-sm font-medium text-gray-700">Justify Content</label>
+                    <select id="justifyContent" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="flex-start">flex-start</option>
+                        <option value="center">center</option>
+                        <option value="space-between">space-between</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <div id="flexboxPreview" class="flex items-center bg-gray-100 h-16 rounded-lg justify-center">
+                        <div class="bg-blue-500 w-6 h-6 rounded-md mx-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button Generator -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-xl font-semibold mb-4">Button</h2>
+                <div class="space-y-4">
+                    <label class="block text-sm font-medium text-gray-700">Color</label>
+                    <input type="color" value="#4F46E5" class="color-input" id="buttonBg">
+                </div>
+                <div class="mt-4">
+                    <button id="buttonPreview" class="px-6 py-3 text-white rounded-lg">Button Preview</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        feather.replace();
+
+        document.getElementById('exploreTools').addEventListener('click', () => {
+            document.getElementById('interactiveSection').classList.toggle('hidden');
+        });
+                // Initialize Feather Icons
+
+
+        // Tool Navigation
+        const toolsGrid = document.getElementById('toolsGrid');
+        const homeButton = document.getElementById('homeButton');
+        const toolContainers = document.querySelectorAll('.tool-container');
+
+        function showTool(toolId) {
+            toolsGrid.style.display = 'none';
+            toolContainers.forEach(container => {
+                container.classList.remove('active');
+                if (container.id === toolId) {
+                    container.classList.add('active');
+                }
+            });
+        }
+
+        function showHome() {
+            toolsGrid.style.display = 'grid';
+            toolContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+        }
+
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('click', () => {
+                showTool(card.dataset.tool);
+            });
+        });
+
+        homeButton.addEventListener('click', showHome);
+
+        // Box Shadow Generator
+        const boxShadowPreview = document.getElementById('boxShadowPreview');
+        const boxShadowCode = document.getElementById('boxShadowCode');
+
+        function updateBoxShadow() {
+            const h = document.getElementById('horizontal').value;
+            const v = document.getElementById('vertical').value;
+            const b = document.getElementById('blur').value;
+            const s = document.getElementById('spread').value;
+            const c = document.getElementById('shadowColor').value;
+
+            const shadow = `${h}px ${v}px ${b}px ${s}px ${c}`;
+            boxShadowPreview.style.boxShadow = shadow;
+            boxShadowCode.textContent = `box-shadow: ${shadow};`;
+        }
+
+        document.querySelectorAll('#boxShadow input').forEach(input => {
+            input.addEventListener('input', updateBoxShadow);
+        });
+
+        // Gradient Generator
+        const gradientPreview = document.getElementById('gradientPreview');
+        const gradientCode = document.getElementById('gradientCode');
+
+        function updateGradient() {
+            const color1 = document.getElementById('color1').value;
+            const color2 = document.getElementById('color2').value;
+            const angle = document.getElementById('angle').value;
+
+            const gradient = `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+            gradientPreview.style.background = gradient;
+            gradientCode.textContent = `background: ${gradient};`;
+        }
+
+        document.querySelectorAll('#gradient input').forEach(input => {
+            input.addEventListener('input', updateGradient);
+        });
+
+        // Flexbox Generator
+        const flexboxPreview = document.getElementById('flexboxPreview');
+        const flexboxCode = document.getElementById('flexboxCode');
+        const flexContainer = document.getElementById('flexContainer');
+
+        function updateFlexbox() {
+            const justifyContent = document.getElementById('justifyContent').value;
+            const alignItems = document.getElementById('alignItems').value;
+
+            flexContainer.style.justifyContent = justifyContent;
+            flexContainer.style.alignItems = alignItems;
+            flexboxCode.textContent = `display: flex;\njustify-content: ${justifyContent};\nalign-items: ${alignItems};`;
+        }
+
+        document.querySelectorAll('#flexbox select').forEach(select => {
+            select.addEventListener('change', updateFlexbox);
+        });
+
+        // Button Generator
+        const buttonPreview = document.getElementById('buttonPreview');
+        const buttonCode = document.getElementById('buttonCode');
+
+        function updateButton() {
+            const bg = document.getElementById('buttonBg').value;
+            const text = document.getElementById('buttonText').value;
+            const radius = document.getElementById('buttonRadius').value;
+            const padding = document.getElementById('buttonPadding').value;
+
+            buttonPreview.style.backgroundColor = bg;
+            buttonPreview.style.color = text;
+            buttonPreview.style.borderRadius = `${radius}px`;
+            buttonPreview.style.padding = `${padding}px`;
+
+            buttonCode.textContent = `background-color: ${bg};\ncolor: ${text};\nborder-radius: ${radius}px;\npadding: ${padding}px;`;
+        }
+
+        document.querySelectorAll('#button input').forEach(input => {
+            input.addEventListener('input', updateButton);
+        });
+    </script>
+</body>
+</html>
+    </script>
+</body>
+</html>
