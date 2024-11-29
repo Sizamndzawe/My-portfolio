@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Calculator</title>
+  <title>Calculator with History</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -80,6 +80,20 @@
     .buttons .delete:hover {
       background: #ff8c00;
     }
+    .history {
+      max-height: 150px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+      padding: 10px;
+      background: #f9f9f9;
+      font-size: 14px;
+    }
+    .history p {
+      margin: 5px 0;
+      padding: 5px;
+      background: #e8e8e8;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -109,9 +123,13 @@
       <button onclick="calculateResult()">=</button>
       <button onclick="appendValue('+')">+</button>
     </div>
+    <div class="history" id="history">
+      <strong>History:</strong>
+    </div>
   </div>
   <script>
     const resultInput = document.getElementById("result");
+    const historyDiv = document.getElementById("history");
 
     function appendValue(value) {
       resultInput.value += value;
@@ -127,10 +145,20 @@
 
     function calculateResult() {
       try {
-        resultInput.value = eval(resultInput.value);
+        const expression = resultInput.value;
+        const result = eval(expression);
+        resultInput.value = result;
+        addToHistory(expression, result);
       } catch {
         resultInput.value = "Error";
       }
+    }
+
+    function addToHistory(expression, result) {
+      const historyEntry = document.createElement("p");
+      historyEntry.textContent = `${expression} = ${result}`;
+      historyDiv.appendChild(historyEntry);
+      historyDiv.scrollTop = historyDiv.scrollHeight; // Auto-scroll to the latest entry
     }
   </script>
 </body>
