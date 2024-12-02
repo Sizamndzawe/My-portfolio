@@ -66,13 +66,13 @@
   },
   {
     "image": "https://picsum.photos/seed/6/800/400",
-    "date": "December 5, 2023",
+    "date": "September 5, 2024",
     "tags": ["Machine Learning", "AI"],
     "title": "Machine Learning in Healthcare",
     "excerpt": "Examining the revolutionary applications of machine learning in medical diagnosis and treatment...",
     "author": {
-      "avatar": "https://i.pravatar.cc/150?u=6",
-      "name": "Rachel Patel"
+      "avatar": "/20240807_085507.jpg",
+      "name": "Siza Mndzawe"
     },
     "content": "Machine learning is revolutionizing healthcare, offering unprecedented capabilities in medical diagnosis, treatment planning, and patient care. This blog post explores the cutting-edge applications of ML in areas such as medical imaging, predictive diagnostics, personalized medicine, and drug discovery. We'll discuss how machine learning algorithms can analyze complex medical data, identify patterns invisible to human observers, and provide insights that can potentially save lives. From early cancer detection to predicting patient risks, the intersection of AI and healthcare promises to transform medical practices and improve patient outcomes.",
     "link": "full_blog.html?title=Machine%20Learning%20in%20Healthcare&date=December%205,%202023&author=Rachel%20Patel&content=Machine%20learning%20is%20revolutionizing%20healthcare%2C%20offering%20unprecedented%20capabilities%20in%20medical%20diagnosis%2C%20treatment%20planning%2C%20and%20patient%20care.%20This%20blog%20post%20explores%20the%20cutting-edge%20applications%20of%20ML%20in%20areas%20such%20as%20medical%20imaging%2C%20predictive%20diagnostics%2C%20personalized%20medicine%2C%20and%20drug%20discovery.%20We'll%20discuss%20how%20machine%20learning%20algorithms%20can%20analyze%20complex%20medical%20data%2C%20identify%20patterns%20invisible%20to%20human%20observers%2C%20and%20provide%20insights%20that%20can%20potentially%20save%20lives.%20From%20early%20cancer%20detection%20to%20predicting%20patient%20risks%2C%20the%20intersection%20of%20AI%20and%20healthcare%20promises%20to%20transform%20medical%20practices%20and%20improve%20patient%20outcomes.&image=https://picsum.photos/seed/6/800/400&tags=Machine%20Learning%2CAI"
