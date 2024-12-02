@@ -104,11 +104,40 @@
             padding: 0;
         }
 
-        #comments-list li {
+        .comment-item {
             background: var(--background);
-            padding: 0.5rem;
+            padding: 1rem;
             border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .comment-body {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        #new-comment-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        #username {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--text-light);
+            border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif;
         }
 
         #new-comment {
@@ -118,6 +147,7 @@
             border-radius: 0.5rem;
             margin-bottom: 1rem;
             font-family: 'Inter', sans-serif;
+            min-height: 100px;
         }
 
         #submit-comment {
@@ -127,6 +157,7 @@
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             cursor: pointer;
+            align-self: flex-start;
         }
 
         #submit-comment:hover {
@@ -169,9 +200,12 @@
         <!-- Comment Section -->
         <div class="comments-section">
             <h3>Comments</h3>
+            <div id="new-comment-container">
+                <input type="text" id="username" placeholder="Your Username (default: Anonymous)">
+                <textarea id="new-comment" placeholder="Write a comment..."></textarea>
+                <button id="submit-comment">Post Comment</button>
+            </div>
             <ul id="comments-list"></ul>
-            <textarea id="new-comment" placeholder="Write a comment..."></textarea>
-            <button id="submit-comment">Post Comment</button>
         </div>
     </div>
 
@@ -213,17 +247,57 @@
 
         // Comments
         const commentsList = document.getElementById("comments-list");
+        const usernameInput = document.getElementById("username");
         const newComment = document.getElementById("new-comment");
         const submitComment = document.getElementById("submit-comment");
 
-        submitComment.addEventListener("click", () => {
-            if (newComment.value.trim()) {
+        // Load comments from localStorage
+        function loadComments() {
+            const postKey = `blogComments_${blog.title}_${blog.date}`;
+            const comments = JSON.parse(localStorage.getItem(postKey) || '[]');
+            commentsList.innerHTML = '';
+            comments.forEach(comment => {
                 const li = document.createElement("li");
-                li.textContent = newComment.value;
+                li.className = "comment-item";
+                li.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-username">${comment.username || 'Anonymous'}</span>
+                        <span class="comment-timestamp">${comment.timestamp}</span>
+                    </div>
+                    <div class="comment-body">${comment.text}</div>
+                `;
                 commentsList.appendChild(li);
-                newComment.value = "";
+            });
+        }
+
+        // Save comments to localStorage
+        function saveComment(username, text) {
+            const postKey = `blogComments_${blog.title}_${blog.date}`;
+            const comments = JSON.parse(localStorage.getItem(postKey) || '[]');
+            const newComment = {
+                username: username || 'Anonymous',
+                text: text,
+                timestamp: new Date().toLocaleString()
+            };
+            comments.push(newComment);
+            localStorage.setItem(postKey, JSON.stringify(comments));
+            loadComments();
+        }
+
+        // Event listener for submit button
+        submitComment.addEventListener("click", () => {
+            const commentText = newComment.value.trim();
+            const username = usernameInput.value.trim();
+
+            if (commentText) {
+                saveComment(username, commentText);
+                newComment.value = '';
+                usernameInput.value = '';
             }
         });
+
+        // Load comments on page load
+        loadComments();
     </script>
 </body>
 </html>
