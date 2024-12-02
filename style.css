@@ -20,6 +20,7 @@
      background-color: var(--background-color);
      color: var(--text-color);
      height: 50px;
+     
 
    }
 
@@ -48,6 +49,7 @@
      list-style: none;
      align-items: center;
      line-height: 0;
+     width: 100%;
 
 
 

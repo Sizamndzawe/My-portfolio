@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Blog Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --background: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card-date {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .blog-card-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .blog-card-tag {
+            background-color: #dbeafe;
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .blog-card-excerpt {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .blog-card-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-card-author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        .blog-card-author-name {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .read-more-btn:hover {
+            background-color: var(--secondary-color);
+            
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Tech Blog</h1>
+            <p>Discover the latest trends, insights, and stories from the world of technology</p>
+        </header>
+
+        <div class="blog-grid" id="blog-grid"></div>
+    </div>
+
+    <script>
+        async function fetchBlogs() {
+            try {
+                const response = await fetch('blog.json'); // Fetch JSON data
+                const blogs = await response.json();
+
+                const blogGrid = document.getElementById('blog-grid');
+
+                blogs.forEach(blog => {
+                    const blogCard = document.createElement('div');
+                    blogCard.classList.add('blog-card');
+                    blogCard.innerHTML = `
+                        <img src="${blog.image}" alt="${blog.title}" class="blog-card-image">
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-date">${blog.date}</span>
+                                <div class="blog-card-tags">
+                                    ${blog.tags ? blog.tags.map(tag => `<span class="blog-card-tag">${tag}</span>`).join('') : ''}
+                                </div>
+                            </div>
+                            <h2 class="blog-card-title">${blog.title}</h2>
+                            <p class="blog-card-excerpt">${blog.excerpt}</p>
+                            <div class="blog-card-author">
+                                <img src="${blog.author.avatar}" alt="${blog.author.name}" class="blog-card-author-avatar">
+                                <span class="blog-card-author-name">${blog.author.name}</span>
+                            </div>
+                            <a href="full_blog.html?title=${encodeURIComponent(blog.title)}&date=${encodeURIComponent(blog.date)}&author=${encodeURIComponent(blog.author.name)}&image=${encodeURIComponent(blog.image)}&content=${encodeURIComponent(blog.content)}&tags=${encodeURIComponent(blog.tags ? blog.tags.join(',') : '')}" 
+                               target="_blank" 
+                               class="read-more-btn">Read More</a>
+                        </div>
+                    `;
+                    blogGrid.appendChild(blogCard);
+                });
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+            }
+        }
+
+        // Call the function to fetch blogs
+        fetchBlogs();
+    </script>
+</body>
+</html>

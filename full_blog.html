@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Same styling as provided earlier */
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --background: #f9fafb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+        }
+
+        .blog-meta {
+            margin-top: 1rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content {
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .blog-tags {
+            margin-top: 2rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .blog-tag {
+            background-color: #dbeafe;
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="blog-header">
+            <h1 id="blog-title">Loading...</h1>
+            <p class="blog-meta">
+                Published on: <span id="blog-date"></span> | Author: <span id="blog-author"></span>
+            </p>
+        </header>
+        <img src="" alt="Blog Image" id="blog-image" class="blog-image">
+        <div class="blog-content" id="blog-content">
+            <!-- Blog content will appear here -->
+        </div>
+        <div class="blog-tags" id="blog-tags">
+            <!-- Blog tags will appear here -->
+        </div>
+        <a href="indexblog.html" class="back-link">← Back to Blogs</a>
+    </div>
+
+    <script>
+        // Helper function to get query parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                title: params.get("title"),
+                date: params.get("date"),
+                author: params.get("author"),
+                content: params.get("content"),
+                image: params.get("image"),
+                tags: params.get("tags") ? params.get("tags").split(",") : []
+            };
+        }
+
+        // Extract blog data from query parameters
+        const blog = getQueryParams();
+
+        // Populate blog details
+        document.getElementById("blog-title").textContent = blog.title || "Untitled Blog";
+        document.getElementById("blog-date").textContent = blog.date || "Unknown Date";
+        document.getElementById("blog-author").textContent = blog.author || "Unknown Author";
+        document.getElementById("blog-image").src = blog.image || "https://via.placeholder.com/800x400";
+        document.getElementById("blog-content").textContent = decodeURIComponent(blog.content || "No content available.");
+
+        // Populate tags
+        const tagsContainer = document.getElementById("blog-tags");
+        blog.tags.forEach(tag => {
+            const tagElement = document.createElement("span");
+            tagElement.className = "blog-tag";
+            tagElement.textContent = tag;
+            tagsContainer.appendChild(tagElement);
+        });
+    </script>
+</body>
+</html>
