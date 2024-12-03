@@ -7,7 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
+        /* Existing styles... (keep all previous CSS) */
+            :root {
             --primary-color: #3b82f6;
             --secondary-color: #10b981;
             --text-dark: #1f2937;
@@ -178,10 +179,62 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+
+        /* New styles for Related Posts */
+        .related-posts {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+        }
+
+        .related-posts h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .related-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .related-post {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .related-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-post-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .related-post-title {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .related-post-author {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Existing body content remains the same -->
+        <div class="container">
         <header class="blog-header">
             <h1 id="blog-title">Loading...</h1>
             <p class="blog-meta">
@@ -223,62 +276,22 @@
             <ul id="comments-list"></ul>
         </div>
     </div>
-    <footer style="background: var(--background); padding: 2rem 1rem; color: var(--text-dark); border-top: 1px solid var(--text-light);">
-  <div class="container">
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem;">
 
-      <!-- Quick Links -->
-      <div>
-        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Quick Links</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Home</a></li>
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">About</a></li>
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Blog</a></li>
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Contact</a></li>
-        </ul>
-      </div>
 
-      <!-- Contact Form -->
-      <div>
-        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Contact Us</h3>
-        <form>
-          <input type="text" placeholder="Your Name" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--text-light); border-radius: 5px;">
-          <input type="email" placeholder="Your Email" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--text-light); border-radius: 5px;">
-          <textarea placeholder="Your Message" rows="3" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--text-light); border-radius: 5px;"></textarea>
-          <button type="submit" style="background: var(--primary-color); color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer;">Send</button>
-        </form>
-      </div>
-
-      <!-- Navigation -->
-      <div>
-        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Navigation</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Privacy Policy</a></li>
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Terms of Service</a></li>
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Support</a></li>
-          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">FAQs</a></li>
-        </ul>
-      </div>
-
-      <!-- Social Media -->
-      <div>
-        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Follow Us</h3>
-        <div style="display: flex; gap: 1rem;">
-          <a href="#" style="color: var(--text-dark);"><i class="fab fa-facebook"></i> Facebook</a>
-          <a href="#" style="color: var(--text-dark);"><i class="fab fa-twitter"></i> Twitter</a>
-          <a href="#" style="color: var(--text-dark);"><i class="fab fa-instagram"></i> Instagram</a>
+    <!-- Add this section just before the footer -->
+    <div class="container">
+        <div class="related-posts">
+            <h3>Related Posts</h3>
+            <div id="related-posts-grid" class="related-posts-grid">
+                <!-- Related posts will be dynamically inserted here -->
+            </div>
         </div>
-      </div>
     </div>
 
-    <div style="text-align: center; margin-top: 2rem; font-size: 0.875rem; color: var(--text-light);">
-      &copy; 2024 Modern Tech Blog. All rights reserved.
-    </div>
-  </div>
-</footer>
+    <!-- Existing footer remains the same -->
 
     <script>
-        function getQueryParams() {
+    function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
             return {
                 title: params.get("title"),
@@ -313,53 +326,69 @@
         document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
         document.getElementById("share-linkedin").href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
 
-const commentsList = document.getElementById("comments-list");
+        const commentsList = document.getElementById("comments-list");
         const newCommentInput = document.getElementById("new-comment");
         const usernameInput = document.getElementById("username");
         const submitCommentButton = document.getElementById("submit-comment");
 
+        // Generate unique ID
+        function generateUniqueId() {
+            return Date.now().toString() + Math.random().toString(36).substr(2, 9);
+        }
+
         // Load comments from localStorage
         function loadComments() {
-            const comments = JSON.parse(localStorage.getItem("comments") || "[]");
+            const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
             renderComments(comments, commentsList);
         }
 
         // Save comments to localStorage
         function saveComments(comments) {
-            localStorage.setItem("comments", JSON.stringify(comments));
+            localStorage.setItem("blogComments", JSON.stringify(comments));
+        }
+
+        // Find comment by ID recursively
+        function findCommentById(comments, id) {
+            for (let comment of comments) {
+                if (comment.id === id) return comment;
+                if (comment.replies) {
+                    const nestedReply = findCommentById(comment.replies, id);
+                    if (nestedReply) return nestedReply;
+                }
+            }
+            return null;
         }
 
         // Render comments recursively
-        function renderComments(comments, parentElement) {
+        function renderComments(comments, parentElement, depth = 0) {
             comments.forEach(comment => {
                 const li = document.createElement("li");
                 li.className = "comment-item";
+                li.style.marginLeft = `${depth * 20}px`; // Indent replies
+
                 li.innerHTML = `
                     <div class="comment-header">
                         <span>${comment.username || "Anonymous"}</span>
                         <span>${comment.timestamp}</span>
                     </div>
                     <div class="comment-body">${comment.text}</div>
-                    <button class="reply-button">Reply</button>
+                    <button class="reply-button" data-comment-id="${comment.id}">Reply</button>
                 `;
 
-                const repliesList = document.createElement("ul");
-                repliesList.className = "replies-list";
-
                 const replyButton = li.querySelector(".reply-button");
-                replyButton.addEventListener("click", () => showReplyForm(li, comment));
+                replyButton.addEventListener("click", () => showReplyForm(li, comment.id));
 
-                li.appendChild(repliesList);
                 parentElement.appendChild(li);
 
+                // Recursively render replies with increased depth
                 if (comment.replies && comment.replies.length > 0) {
-                    renderComments(comment.replies, repliesList);
+                    renderComments(comment.replies, parentElement, depth + 1);
                 }
             });
         }
 
         // Show reply form
-        function showReplyForm(parentElement, parentComment) {
+        function showReplyForm(parentElement, parentCommentId) {
             if (parentElement.querySelector(".reply-form")) return;
 
             const replyForm = document.createElement("div");
@@ -379,19 +408,26 @@ const commentsList = document.getElementById("comments-list");
                 const replyUsername = replyUsernameInput.value.trim() || "Anonymous";
 
                 if (replyText) {
-                    const reply = {
-                        username: replyUsername,
-                        text: replyText,
-                        timestamp: new Date().toLocaleString(),
-                        replies: []
-                    };
+                    const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
+                    const parentComment = findCommentById(comments, parentCommentId);
 
-                    parentComment.replies = parentComment.replies || [];
-                    parentComment.replies.push(reply);
+                    if (parentComment) {
+                        const reply = {
+                            id: generateUniqueId(),
+                            username: replyUsername,
+                            text: replyText,
+                            timestamp: new Date().toLocaleString(),
+                            replies: []
+                        };
 
-                    saveComments(JSON.parse(localStorage.getItem("comments") || "[]"));
-                    commentsList.innerHTML = "";
-                    loadComments();
+                        parentComment.replies = parentComment.replies || [];
+                        parentComment.replies.push(reply);
+
+                        saveComments(comments);
+                        commentsList.innerHTML = "";
+                        loadComments();
+                        replyForm.remove();
+                    }
                 }
             });
 
@@ -404,9 +440,10 @@ const commentsList = document.getElementById("comments-list");
             const username = usernameInput.value.trim() || "Anonymous";
 
             if (commentText) {
-                const comments = JSON.parse(localStorage.getItem("comments") || "[]");
+                const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
 
                 comments.push({
+                    id: generateUniqueId(),
                     username,
                     text: commentText,
                     timestamp: new Date().toLocaleString(),
@@ -423,7 +460,93 @@ const commentsList = document.getElementById("comments-list");
 
         // Load comments on page load
         loadComments();
+ 
+        // Existing script remains the same, and add these functions at the end
 
+        // Mock database of blog posts (in a real scenario, this would come from a backend)
+        const blogPosts = [
+            {
+                id: 1,
+                title: "The Future of Artificial Intelligence",
+                author: "Emily Rodriguez",
+                image: "https://via.placeholder.com/300x200?text=AI+Future",
+                tags: ["technology", "ai", "innovation"]
+            },
+            {
+                id: 2,
+                title: "Sustainable Technology Trends",
+                author: "Michael Chen",
+                image: "https://via.placeholder.com/300x200?text=Green+Tech",
+                tags: ["sustainability", "technology", "innovation"]
+            },
+            {
+                id: 3,
+                title: "Cybersecurity in the Digital Age",
+                author: "Sarah Johnson",
+                image: "https://via.placeholder.com/300x200?text=Cybersecurity",
+                tags: ["technology", "security", "internet"]
+            },
+            {
+                id: 4,
+                title: "Machine Learning Breakthroughs",
+                author: "David Kim",
+                image: "https://via.placeholder.com/300x200?text=Machine+Learning",
+                tags: ["ai", "technology", "innovation"]
+            }
+        ];
+
+        // Function to find related posts based on shared tags
+        function findRelatedPosts(currentPost, allPosts, limit = 3) {
+            // If no tags, return random posts
+            if (!currentPost.tags || currentPost.tags.length === 0) {
+                return allPosts.filter(post => post.id !== currentPost.id).slice(0, limit);
+            }
+
+            // Find posts with matching tags
+            const relatedPosts = allPosts.filter(post => {
+                if (post.id === currentPost.id) return false;
+                return post.tags.some(tag => currentPost.tags.includes(tag));
+            });
+
+            // If not enough related posts, fill with random posts
+            while (relatedPosts.length < limit && allPosts.length > relatedPosts.length) {
+                const randomPost = allPosts.find(
+                    post => !relatedPosts.includes(post) && post.id !== currentPost.id
+                );
+                if (randomPost) relatedPosts.push(randomPost);
+            }
+
+            return relatedPosts.slice(0, limit);
+        }
+
+        // Render related posts
+        function renderRelatedPosts() {
+            const relatedPostsGrid = document.getElementById("related-posts-grid");
+            const currentPost = getQueryParams();
+
+            const relatedPosts = findRelatedPosts(currentPost, blogPosts);
+
+            relatedPosts.forEach(post => {
+                const postElement = document.createElement("div");
+                postElement.className = "related-post";
+                postElement.innerHTML = `
+                    <img src="${post.image}" alt="${post.title}" class="related-post-image">
+                    <h4 class="related-post-title">${post.title}</h4>
+                    <p class="related-post-author">By ${post.author}</p>
+                `;
+
+                // Add click handler to navigate to post (you'd customize the URL generation)
+                postElement.addEventListener("click", () => {
+                    const postUrl = `?title=${encodeURIComponent(post.title)}&author=${encodeURIComponent(post.author)}&image=${encodeURIComponent(post.image)}&tags=${post.tags.join(",")}`;
+                    window.location.href = postUrl;
+                });
+
+                relatedPostsGrid.appendChild(postElement);
+            });
+        }
+
+        // Call renderRelatedPosts after existing page load functions
+        renderRelatedPosts();
     </script>
 </body>
 </html>
