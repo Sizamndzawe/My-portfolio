@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #3b82f6;
@@ -77,6 +78,8 @@
         .share-section {
             margin-top: 2rem;
             text-align: center;
+            position: sticky;
+            top: 10px;
         }
 
         .share-section h3 {
@@ -208,6 +211,59 @@
             <ul id="comments-list"></ul>
         </div>
     </div>
+    <footer style="background: var(--background); padding: 2rem 1rem; color: var(--text-dark); border-top: 1px solid var(--text-light);">
+  <div class="container">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem;">
+
+      <!-- Quick Links -->
+      <div>
+        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Quick Links</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Home</a></li>
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">About</a></li>
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Blog</a></li>
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Form -->
+      <div>
+        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Contact Us</h3>
+        <form>
+          <input type="text" placeholder="Your Name" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--text-light); border-radius: 5px;">
+          <input type="email" placeholder="Your Email" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--text-light); border-radius: 5px;">
+          <textarea placeholder="Your Message" rows="3" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--text-light); border-radius: 5px;"></textarea>
+          <button type="submit" style="background: var(--primary-color); color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer;">Send</button>
+        </form>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Navigation</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Privacy Policy</a></li>
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Terms of Service</a></li>
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">Support</a></li>
+          <li><a href="#" style="text-decoration: none; color: var(--text-dark);">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div>
+        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Follow Us</h3>
+        <div style="display: flex; gap: 1rem;">
+          <a href="#" style="color: var(--text-dark);"><i class="fab fa-facebook"></i> Facebook</a>
+          <a href="#" style="color: var(--text-dark);"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="#" style="color: var(--text-dark);"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; font-size: 0.875rem; color: var(--text-light);">
+      &copy; 2024 Modern Tech Blog. All rights reserved.
+    </div>
+  </div>
+</footer>
 
     <script>
         function getQueryParams() {
