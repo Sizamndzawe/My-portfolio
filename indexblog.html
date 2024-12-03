@@ -1,341 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Tech Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #3b82f6;
-            --secondary-color: #10b981;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --background: #f9fafb;
-            --accent-color: #8b5cf6;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Tech Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #10b981;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --background: #f9fafb;
+      --accent-color: #8b5cf6;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background);
-            line-height: 1.6;
-            color: var(--text-dark);
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      line-height: 1.6;
+      color: var(--text-dark);
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
 
-        /* Navbar Styles */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: var(--primary-color);
-            color: white;
-        }
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      /* Transparent white */
+      backdrop-filter: blur(10px);
+      /* Creates the glass effect */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      /* Subtle border for definition */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Add some shadow for depth */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      /* Smooth transition */
+    }
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 1rem;
-            transition: color 0.3s ease;
-        }
+    .navbar a {
+      color: #222;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
 
-        .navbar a:hover {
-            color: var(--secondary-color);
-        }
+    .navbar a:hover {
+      color: var(--secondary-color);
+    }
 
-        /* Header Styles */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
+    /* Header Styles */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
 
-        .header h1 {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
+    .header h1 {
+      font-size: 2.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
 
-        .header p {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--text-light);
-        }
+    .header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-light);
+    }
 
-        /* Search and Filter Styles */
-        .search-filter-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
+    /* Search and Filter Styles */
+    .search-filter-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
 
-        #search-input {
-            flex-grow: 1;
-            padding: 0.75rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-        }
+    #search-input {
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
 
-        #tag-filter {
-            padding: 0.75rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-        }
+    #tag-filter {
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
 
-        /* Blog Grid Styles */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+    /* Blog Grid Styles */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
 
-        .blog-card {
-            background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
+    .blog-card {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .blog-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-        }
+    .blog-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    }
 
-        .blog-card-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
+    .blog-card-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
 
-        .blog-card-content {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+    .blog-card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
-        .blog-card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
+    .blog-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
 
-        .blog-card-date {
-            color: var(--text-light);
-            font-size: 0.875rem;
-        }
+    .blog-card-date {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
 
-        .blog-card-tags {
-            display: flex;
-            gap: 0.5rem;
-        }
+    .blog-card-tags {
+      display: flex;
+      gap: 0.5rem;
+    }
 
-        .blog-card-tag {
-            background-color: #dbeafe;
-            color: var(--primary-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-        }
+    .blog-card-tag {
+      background-color: #dbeafe;
+      color: var(--primary-color);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+    }
 
-        .blog-card-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
+    .blog-card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
 
-        .blog-card-excerpt {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
+    .blog-card-excerpt {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
 
-        .blog-card-author {
-            display: flex;
-            align-items: center;
-            margin-top: auto;
-        }
+    .blog-card-author {
+      display: flex;
+      align-items: center;
+      margin-top: auto;
+    }
 
-        .blog-card-author-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 1rem;
-        }
+    .blog-card-author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
 
-        .blog-card-author-name {
-            font-weight: 500;
-            color: var(--text-dark);
-        }
+    .blog-card-author-name {
+      font-weight: 500;
+      color: var(--text-dark);
+    }
 
-        .read-more-btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-align: center;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
+    .read-more-btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
 
-        .read-more-btn:hover {
-            background-color: var(--secondary-color);
-        }
+    .read-more-btn:hover {
+      background-color: var(--secondary-color);
+    }
 
-        /* Pagination Styles */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 2rem;
-            gap: 1rem;
-        }
+    /* Pagination Styles */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
 
-        .pagination-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .pagination-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        .pagination-btn:disabled {
-            background-color: var(--text-light);
-            cursor: not-allowed;
-        }
+    .pagination-btn:disabled {
+      background-color: var(--text-light);
+      cursor: not-allowed;
+    }
 
-        /* No Results Styles */
-        .no-results {
-            text-align: center;
-            color: var(--text-light);
-            padding: 2rem;
-            background-color: white;
-            border-radius: 0.75rem;
-        }
-        /* Top Categories Section */
-.categories-section-container {
-    margin: 2rem 0;
-    text-align: center;
-    padding: 1rem;
-    background-color: var(--background);
-    border-radius: 0.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+    /* No Results Styles */
+    .no-results {
+      text-align: center;
+      color: var(--text-light);
+      padding: 2rem;
+      background-color: white;
+      border-radius: 0.75rem;
+    }
 
-.categories-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-}
+    /* Top Categories Section */
+    .categories-section-container {
+      margin: 2rem 0;
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--background);
+      border-radius: 0.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
 
-.categories-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-}
+    .categories-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
 
-.category-btn {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: capitalize;
-}
+    .categories-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
 
-.category-btn:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-}
+    .category-btn {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: capitalize;
+    }
 
-.category-btn:focus {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
-}
+    .category-btn:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+    }
 
-        @media (max-width: 768px) {
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
+    .category-btn:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
 
-            .search-filter-container {
-                flex-direction: column;
-            }
-        }
-    </style>
+    @media (max-width: 768px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-filter-container {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
+  <div class="container">
+
+    <header class="header">
+      <h1>Tech Insights</h1>
+      <p>Explore cutting-edge technology, innovative trends, and expert perspectives in our comprehensive tech blog</p>
+    </header>
         <!-- Navbar -->
-        <div class="navbar">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Blog</a>
-            <a href="#">Contact</a>
-        </div>
-
-        <header class="header">
-            <h1>Tech Insights</h1>
-            <p>Explore cutting-edge technology, innovative trends, and expert perspectives in our comprehensive tech blog</p>
-        </header>
-
-        <div class="search-filter-container">
-            <input type="text" id="search-input" placeholder="Search blogs...">
-            <select id="tag-filter">
-                <option value="">All Tags</option>
-            </select>
-        </div>
-
-        <div class="blog-grid" id="blog-grid"></div>
-
+    <div class="navbar">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
     </div>
 
-        <div class="pagination">
-            <button id="prev-btn" class="pagination-btn" disabled>Previous</button>
-            <span id="page-info">Page 1 of 1</span>
-            <button id="next-btn" class="pagination-btn" disabled>Next</button>
-        </div>
+
+    <div class="search-filter-container">
+      <input type="text" id="search-input" placeholder="Search blogs...">
+      <select id="tag-filter">
+        <option value="">All Tags</option>
+      </select>
     </div>
-    <!-- Top Categories Section -->
-<section class="categories-section-container">
+
+    <div class="blog-grid" id="blog-grid"></div>
+
+  </div>
+
+  <div class="pagination">
+    <button id="prev-btn" class="pagination-btn" disabled>Previous</button>
+    <span id="page-info">Page 1 of 1</span>
+    <button id="next-btn" class="pagination-btn" disabled>Next</button>
+  </div>
+  </div>
+  <!-- Top Categories Section -->
+  <section class="categories-section-container">
     <h2 class="categories-title">Top Categories</h2>
     <div class="categories-section"></div>
-</section>
+  </section>
 
-<script>
+  <script>
     // Global variables
     let blogs = [];
     let filteredBlogs = [];
@@ -344,70 +360,70 @@
 
     // Fetch blogs
     async function fetchBlogs() {
-        try {
-            const response = await fetch('blog.json');
-            blogs = await response.json();
+      try {
+        const response = await fetch('blog.json');
+        blogs = await response.json();
 
-            // Populate tag filter
-            const tagFilter = document.getElementById('tag-filter');
-            const uniqueTags = [...new Set(blogs.flatMap(blog => blog.tags || []))];
-            uniqueTags.forEach(tag => {
-                const option = document.createElement('option');
-                option.value = tag;
-                option.textContent = tag;
-                tagFilter.appendChild(option);
-            });
+        // Populate tag filter
+        const tagFilter = document.getElementById('tag-filter');
+        const uniqueTags = [...new Set(blogs.flatMap(blog => blog.tags || []))];
+        uniqueTags.forEach(tag => {
+          const option = document.createElement('option');
+          option.value = tag;
+          option.textContent = tag;
+          tagFilter.appendChild(option);
+        });
 
-            // Render top categories dynamically
-            renderTopCategories();
+        // Render top categories dynamically
+        renderTopCategories();
 
-            // Render blogs and setup events
-            renderBlogs();
-            setupEventListeners();
-        } catch (error) {
-            console.error('Error fetching blogs:', error);
-        }
+        // Render blogs and setup events
+        renderBlogs();
+        setupEventListeners();
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      }
     }
 
     // Render blogs with pagination
     function renderBlogs() {
-        const blogGrid = document.getElementById('blog-grid');
-        const pageInfo = document.getElementById('page-info');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
+      const blogGrid = document.getElementById('blog-grid');
+      const pageInfo = document.getElementById('page-info');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
 
-        // Apply search and filter
-        const searchTerm = document.getElementById('search-input').value.toLowerCase();
-        const tagFilter = document.getElementById('tag-filter').value;
+      // Apply search and filter
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const tagFilter = document.getElementById('tag-filter').value;
 
-        filteredBlogs = blogs.filter(blog => 
-            (blog.title.toLowerCase().includes(searchTerm) || 
-             blog.excerpt.toLowerCase().includes(searchTerm)) &&
-            (tagFilter === '' || (blog.tags && blog.tags.includes(tagFilter)))
-        );
+      filteredBlogs = blogs.filter(blog =>
+        (blog.title.toLowerCase().includes(searchTerm) ||
+          blog.excerpt.toLowerCase().includes(searchTerm)) &&
+        (tagFilter === '' || (blog.tags && blog.tags.includes(tagFilter)))
+      );
 
-        // Calculate pagination
-        const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
-        const startIndex = (currentPage - 1) * blogsPerPage;
-        const endIndex = startIndex + blogsPerPage;
-        const paginatedBlogs = filteredBlogs.slice(startIndex, endIndex);
+      // Calculate pagination
+      const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+      const startIndex = (currentPage - 1) * blogsPerPage;
+      const endIndex = startIndex + blogsPerPage;
+      const paginatedBlogs = filteredBlogs.slice(startIndex, endIndex);
 
-        // Clear previous content
-        blogGrid.innerHTML = '';
+      // Clear previous content
+      blogGrid.innerHTML = '';
 
-        // Render blogs
-        if (paginatedBlogs.length === 0) {
-            blogGrid.innerHTML = `
+      // Render blogs
+      if (paginatedBlogs.length === 0) {
+        blogGrid.innerHTML = `
                 <div class="no-results">
                     <h2>No blogs found</h2>
                     <p>Try adjusting your search or tag filter</p>
                 </div>
             `;
-        } else {
-            paginatedBlogs.forEach(blog => {
-                const blogCard = document.createElement('div');
-                blogCard.classList.add('blog-card');
-                blogCard.innerHTML = `
+      } else {
+        paginatedBlogs.forEach(blog => {
+          const blogCard = document.createElement('div');
+          blogCard.classList.add('blog-card');
+          blogCard.innerHTML = `
                     <img src="${blog.image}" alt="${blog.title}" class="blog-card-image">
                     <div class="blog-card-content">
                         <div class="blog-card-meta">
@@ -427,96 +443,97 @@
                            class="read-more-btn">Read More</a>
                     </div>
                 `;
-                blogGrid.appendChild(blogCard);
-            });
-        }
+          blogGrid.appendChild(blogCard);
+        });
+      }
 
-        // Update pagination controls
-        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-        prevBtn.disabled = currentPage === 1;
-        nextBtn.disabled = currentPage === totalPages;
+      // Update pagination controls
+      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = currentPage === totalPages;
     }
 
     // Render top categories dynamically
     function getTopCategories(blogs, limit = 5) {
-        const tagCounts = {};
+      const tagCounts = {};
 
-        blogs.forEach(blog => {
-            (blog.tags || []).forEach(tag => {
-                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-            });
+      blogs.forEach(blog => {
+        (blog.tags || []).forEach(tag => {
+          tagCounts[tag] = (tagCounts[tag] || 0) + 1;
         });
+      });
 
-        // Sort tags by frequency and return the top 'limit' categories
-        return Object.entries(tagCounts)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, limit)
-            .map(([tag]) => tag);
+      // Sort tags by frequency and return the top 'limit' categories
+      return Object.entries(tagCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, limit)
+        .map(([tag]) => tag);
     }
 
     function renderTopCategories() {
-        const categoriesSection = document.querySelector('.categories-section');
-        categoriesSection.innerHTML = ''; // Clear existing content
+      const categoriesSection = document.querySelector('.categories-section');
+      categoriesSection.innerHTML = ''; // Clear existing content
 
-        const topCategories = getTopCategories(blogs); // Get top categories dynamically
-        topCategories.forEach(category => {
-            const categoryButton = document.createElement('button');
-            categoryButton.classList.add('category-btn');
-            categoryButton.textContent = category;
-            categoryButton.addEventListener('click', () => filterByCategory(category));
-            categoriesSection.appendChild(categoryButton);
-        });
+      const topCategories = getTopCategories(blogs); // Get top categories dynamically
+      topCategories.forEach(category => {
+        const categoryButton = document.createElement('button');
+        categoryButton.classList.add('category-btn');
+        categoryButton.textContent = category;
+        categoryButton.addEventListener('click', () => filterByCategory(category));
+        categoriesSection.appendChild(categoryButton);
+      });
     }
 
     // Filter blogs by category
     function filterByCategory(category) {
-        const searchTerm = document.getElementById('search-input').value.toLowerCase();
-        filteredBlogs = blogs.filter(blog => 
-            (blog.title.toLowerCase().includes(searchTerm) || 
-             blog.excerpt.toLowerCase().includes(searchTerm)) &&
-            (blog.tags && blog.tags.includes(category))
-        );
-        currentPage = 1;
-        renderBlogs();
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      filteredBlogs = blogs.filter(blog =>
+        (blog.title.toLowerCase().includes(searchTerm) ||
+          blog.excerpt.toLowerCase().includes(searchTerm)) &&
+        (blog.tags && blog.tags.includes(category))
+      );
+      currentPage = 1;
+      renderBlogs();
     }
 
     // Setup event listeners
     function setupEventListeners() {
-        const searchInput = document.getElementById('search-input');
-        const tagFilter = document.getElementById('tag-filter');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
+      const searchInput = document.getElementById('search-input');
+      const tagFilter = document.getElementById('tag-filter');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
 
-        // Search and filter events
-        searchInput.addEventListener('input', () => {
-            currentPage = 1;
-            renderBlogs();
-        });
+      // Search and filter events
+      searchInput.addEventListener('input', () => {
+        currentPage = 1;
+        renderBlogs();
+      });
 
-        tagFilter.addEventListener('change', () => {
-            currentPage = 1;
-            renderBlogs();
-        });
+      tagFilter.addEventListener('change', () => {
+        currentPage = 1;
+        renderBlogs();
+      });
 
-        // Pagination events
-        prevBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                renderBlogs();
-            }
-        });
+      // Pagination events
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderBlogs();
+        }
+      });
 
-        nextBtn.addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderBlogs();
-            }
-        });
+      nextBtn.addEventListener('click', () => {
+        const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderBlogs();
+        }
+      });
     }
 
     // Initial fetch
     fetchBlogs();
-</script>
+  </script>
 </body>
+
 </html>
