@@ -98,73 +98,85 @@
             height: 32px;
         }
 
-        .comments-section {
+ .comments-section {
             margin-top: 2rem;
         }
 
+        /* Comment and reply styles */
         #comments-list {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
         }
 
         .comment-item {
-            background: var(--background);
+            margin: 1rem 0;
             padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            flex-direction: column;
+            background: #f1f5f9;
+            border-radius: 8px;
         }
 
         .comment-header {
-            display: flex;
-            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #6b7280;
             margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--text-light);
         }
 
         .comment-body {
             font-size: 1rem;
-            color: var(--text-dark);
+            color: #1f2937;
+            margin-bottom: 0.5rem;
         }
 
-        #new-comment-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .reply-button {
+            cursor: pointer;
+            color: #3b82f6;
+            border: none;
+            background: none;
+            font-size: 0.9rem;
         }
 
-        #username {
+        /* Reply form styles */
+        .reply-form {
+            margin-top: 1rem;
+        }
+
+        .reply-form input, .reply-form textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--text-light);
-            border-radius: 0.5rem;
-            font-family: 'Inter', sans-serif;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
         }
 
-        #new-comment {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--text-light);
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
-            min-height: 100px;
-        }
-
-        #submit-comment {
-            background-color: var(--primary-color);
+        .reply-form button {
+            padding: 0.5rem 1rem;
+            background: #3b82f6;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
+            border-radius: 4px;
             cursor: pointer;
-            align-self: flex-start;
         }
 
-        #submit-comment:hover {
-            background-color: var(--secondary-color);
+        /* Comment input */
+        #new-comment-container {
+            margin-bottom: 1.5rem;
+        }
+
+        #new-comment-container input, #new-comment-container textarea {
+            width: 100%;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+        }
+
+        #new-comment-container button {
+            padding: 0.5rem 1rem;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -301,59 +313,117 @@
         document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
         document.getElementById("share-linkedin").href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
 
-        // Comments
-        const commentsList = document.getElementById("comments-list");
+const commentsList = document.getElementById("comments-list");
+        const newCommentInput = document.getElementById("new-comment");
         const usernameInput = document.getElementById("username");
-        const newComment = document.getElementById("new-comment");
-        const submitComment = document.getElementById("submit-comment");
+        const submitCommentButton = document.getElementById("submit-comment");
 
         // Load comments from localStorage
         function loadComments() {
-            const postKey = `blogComments_${blog.title}_${blog.date}`;
-            const comments = JSON.parse(localStorage.getItem(postKey) || '[]');
-            commentsList.innerHTML = '';
+            const comments = JSON.parse(localStorage.getItem("comments") || "[]");
+            renderComments(comments, commentsList);
+        }
+
+        // Save comments to localStorage
+        function saveComments(comments) {
+            localStorage.setItem("comments", JSON.stringify(comments));
+        }
+
+        // Render comments recursively
+        function renderComments(comments, parentElement) {
             comments.forEach(comment => {
                 const li = document.createElement("li");
                 li.className = "comment-item";
                 li.innerHTML = `
                     <div class="comment-header">
-                        <span class="comment-username">${comment.username || 'Anonymous'}</span>
-                        <span class="comment-timestamp">${comment.timestamp}</span>
+                        <span>${comment.username || "Anonymous"}</span>
+                        <span>${comment.timestamp}</span>
                     </div>
                     <div class="comment-body">${comment.text}</div>
+                    <button class="reply-button">Reply</button>
                 `;
-                commentsList.appendChild(li);
+
+                const repliesList = document.createElement("ul");
+                repliesList.className = "replies-list";
+
+                const replyButton = li.querySelector(".reply-button");
+                replyButton.addEventListener("click", () => showReplyForm(li, comment));
+
+                li.appendChild(repliesList);
+                parentElement.appendChild(li);
+
+                if (comment.replies && comment.replies.length > 0) {
+                    renderComments(comment.replies, repliesList);
+                }
             });
         }
 
-        // Save comments to localStorage
-        function saveComment(username, text) {
-            const postKey = `blogComments_${blog.title}_${blog.date}`;
-            const comments = JSON.parse(localStorage.getItem(postKey) || '[]');
-            const newComment = {
-                username: username || 'Anonymous',
-                text: text,
-                timestamp: new Date().toLocaleString()
-            };
-            comments.push(newComment);
-            localStorage.setItem(postKey, JSON.stringify(comments));
-            loadComments();
+        // Show reply form
+        function showReplyForm(parentElement, parentComment) {
+            if (parentElement.querySelector(".reply-form")) return;
+
+            const replyForm = document.createElement("div");
+            replyForm.className = "reply-form";
+            replyForm.innerHTML = `
+                <input type="text" placeholder="Your Name (optional)">
+                <textarea placeholder="Write a reply..."></textarea>
+                <button>Post Reply</button>
+            `;
+
+            const replyUsernameInput = replyForm.querySelector("input");
+            const replyTextInput = replyForm.querySelector("textarea");
+            const replyButton = replyForm.querySelector("button");
+
+            replyButton.addEventListener("click", () => {
+                const replyText = replyTextInput.value.trim();
+                const replyUsername = replyUsernameInput.value.trim() || "Anonymous";
+
+                if (replyText) {
+                    const reply = {
+                        username: replyUsername,
+                        text: replyText,
+                        timestamp: new Date().toLocaleString(),
+                        replies: []
+                    };
+
+                    parentComment.replies = parentComment.replies || [];
+                    parentComment.replies.push(reply);
+
+                    saveComments(JSON.parse(localStorage.getItem("comments") || "[]"));
+                    commentsList.innerHTML = "";
+                    loadComments();
+                }
+            });
+
+            parentElement.appendChild(replyForm);
         }
 
-        // Event listener for submit button
-        submitComment.addEventListener("click", () => {
-            const commentText = newComment.value.trim();
-            const username = usernameInput.value.trim();
+        // Add a new comment
+        submitCommentButton.addEventListener("click", () => {
+            const commentText = newCommentInput.value.trim();
+            const username = usernameInput.value.trim() || "Anonymous";
 
             if (commentText) {
-                saveComment(username, commentText);
-                newComment.value = '';
-                usernameInput.value = '';
+                const comments = JSON.parse(localStorage.getItem("comments") || "[]");
+
+                comments.push({
+                    username,
+                    text: commentText,
+                    timestamp: new Date().toLocaleString(),
+                    replies: []
+                });
+
+                saveComments(comments);
+                newCommentInput.value = "";
+                usernameInput.value = "";
+                commentsList.innerHTML = "";
+                loadComments();
             }
         });
 
         // Load comments on page load
         loadComments();
+
     </script>
 </body>
 </html>
