@@ -1,372 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Existing styles... (keep all previous CSS) */
-            :root {
-            --primary-color: #3b82f6;
-            --secondary-color: #10b981;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --background: #f9fafb;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Existing styles... (keep all previous CSS) */
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #10b981;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --background: #f9fafb;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background);
-            line-height: 1.6;
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      line-height: 1.6;
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
 
-        .blog-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+    .blog-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        .blog-header h1 {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-        }
+    .blog-header h1 {
+      font-size: 2.5rem;
+      color: var(--text-dark);
+    }
 
-        .blog-meta {
-            margin-top: 1rem;
-            color: var(--text-light);
-            font-size: 0.875rem;
-        }
+    .blog-meta {
+      margin-top: 1rem;
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
 
-        .blog-image {
-            width: 100%;
-            height: auto;
-            border-radius: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
+    .blog-image {
+      width: 100%;
+      height: auto;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .blog-content {
-            color: var(--text-dark);
-            line-height: 1.8;
-        }
+    .blog-content {
+      color: var(--text-dark);
+      line-height: 1.8;
+    }
 
-        .blog-tags {
-            margin-top: 2rem;
-            display: flex;
-            gap: 0.5rem;
-        }
+    .blog-tags {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.5rem;
+    }
 
-        .blog-tag {
-            background-color: #dbeafe;
-            color: var(--primary-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-        }
+    .blog-tag {
+      background-color: #dbeafe;
+      color: var(--primary-color);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+    }
 
-        .share-section {
-            margin-top: 2rem;
-            text-align: center;
-            position: sticky;
-            top: 10px;
-        }
+    .share-section {
+      margin-top: 2rem;
+      text-align: center;
+      position: sticky;
+      top: 10px;
+    }
 
-        .share-section h3 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
+    .share-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
 
-        .share-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
+    .share-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
 
-        .share-icon {
-            width: 32px;
-            height: 32px;
-        }
+    .share-icon {
+      width: 32px;
+      height: 32px;
+    }
 
- .comments-section {
-            margin-top: 2rem;
-        }
+    .comments-section {
+      margin-top: 2rem;
+    }
 
-        /* Comment and reply styles */
-        #comments-list {
-            list-style: none;
-            padding: 0;
-        }
+    /* Comment and reply styles */
+    #comments-list {
+      list-style: none;
+      padding: 0;
+    }
 
-        .comment-item {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #f1f5f9;
-            border-radius: 8px;
-        }
+    .comment-item {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
 
-        .comment-header {
-            font-size: 0.9rem;
-            color: #6b7280;
-            margin-bottom: 0.5rem;
-        }
+    .comment-header {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
 
-        .comment-body {
-            font-size: 1rem;
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-        }
+    .comment-body {
+      font-size: 1rem;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
 
-        .reply-button {
-            cursor: pointer;
-            color: #3b82f6;
-            border: none;
-            background: none;
-            font-size: 0.9rem;
-        }
+    .reply-button {
+      cursor: pointer;
+      color: #3b82f6;
+      border: none;
+      background: none;
+      font-size: 0.9rem;
+    }
 
-        /* Reply form styles */
-        .reply-form {
-            margin-top: 1rem;
-        }
+    /* Reply form styles */
+    .reply-form {
+      margin-top: 1rem;
+    }
 
-        .reply-form input, .reply-form textarea {
-            width: 100%;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-        }
+    .reply-form input,
+    .reply-form textarea {
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+    }
 
-        .reply-form button {
-            padding: 0.5rem 1rem;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .reply-form button {
+      padding: 0.5rem 1rem;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        /* Comment input */
-        #new-comment-container {
-            margin-bottom: 1.5rem;
-        }
+    /* Comment input */
+    #new-comment-container {
+      margin-bottom: 1.5rem;
+    }
 
-        #new-comment-container input, #new-comment-container textarea {
-            width: 100%;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-        }
+    #new-comment-container input,
+    #new-comment-container textarea {
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+    }
 
-        #new-comment-container button {
-            padding: 0.5rem 1rem;
-            background: #10b981;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    #new-comment-container button {
+      padding: 0.5rem 1rem;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
 
-        /* New styles for Related Posts */
-        .related-posts {
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: #f1f5f9;
-            border-radius: 0.75rem;
-        }
+    /* New styles for Related Posts */
+    .related-posts {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #f1f5f9;
+      border-radius: 0.75rem;
+    }
 
-        .related-posts h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
+    .related-posts h3 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
 
-        .related-posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
+    .related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
 
-        .related-post {
-            background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            transition: transform 0.3s ease;
-        }
+    .related-post {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
 
-        .related-post:hover {
-            transform: translateY(-5px);
-        }
+    .related-post:hover {
+      transform: translateY(-5px);
+    }
 
-        .related-post-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 0.5rem;
-            margin-bottom: 0.75rem;
-        }
+    .related-post-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
 
-        .related-post-title {
-            font-size: 1rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
+    .related-post-title {
+      font-size: 1rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
 
-        .related-post-author {
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
-    </style>
+    .related-post-author {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Existing body content remains the same -->
-        <div class="container">
-        <header class="blog-header">
-            <h1 id="blog-title">Loading...</h1>
-            <p class="blog-meta">
-                Published on: <span id="blog-date"></span> | Author: <span id="blog-author"></span>
-            </p>
-        </header>
-        <img src="" alt="Blog Image" id="blog-image" class="blog-image">
-        <div class="blog-content" id="blog-content">
-            <!-- Blog content will appear here -->
-        </div>
-        <div class="blog-tags" id="blog-tags">
-            <!-- Blog tags will appear here -->
-        </div>
-
-        <!-- Share Section -->
-        <div class="share-section">
-            <h3>Share this post:</h3>
-            <div class="share-icons">
-                <a href="#" id="share-facebook" target="_blank" aria-label="Share on Facebook">
-                    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="share-icon">
-                </a>
-                <a href="#" id="share-twitter" target="_blank" aria-label="Share on Twitter">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" class="share-icon">
-                </a>
-                <a href="#" id="share-linkedin" target="_blank" aria-label="Share on LinkedIn">
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="share-icon">
-                </a>
-            </div>
-        </div>
-
-        <!-- Comment Section -->
-        <div class="comments-section">
-            <h3>Comments</h3>
-            <div id="new-comment-container">
-                <input type="text" id="username" placeholder="Your Username (default: Anonymous)">
-                <textarea id="new-comment" placeholder="Write a comment..."></textarea>
-                <button id="submit-comment">Post Comment</button>
-            </div>
-            <ul id="comments-list"></ul>
-        </div>
+  <!-- Existing body content remains the same -->
+  <div class="container">
+    <header class="blog-header">
+      <h1 id="blog-title">Loading...</h1>
+      <p class="blog-meta">
+        Published on: <span id="blog-date"></span> | Author: <span id="blog-author"></span>
+      </p>
+    </header>
+    <img src="" alt="Blog Image" id="blog-image" class="blog-image">
+    <div class="blog-content" id="blog-content">
+      <!-- Blog content will appear here -->
+    </div>
+    <div class="blog-tags" id="blog-tags">
+      <!-- Blog tags will appear here -->
     </div>
 
-
-    <!-- Add this section just before the footer -->
-    <div class="container">
-        <div class="related-posts">
-            <h3>Related Posts</h3>
-            <div id="related-posts-grid" class="related-posts-grid">
-                <!-- Related posts will be dynamically inserted here -->
-            </div>
-        </div>
+    <!-- Share Section -->
+    <div class="share-section">
+      <h3>Share this post:</h3>
+      <div class="share-icons">
+        <a href="#" id="share-facebook" target="_blank" aria-label="Share on Facebook">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="share-icon">
+        </a>
+        <a href="#" id="share-twitter" target="_blank" aria-label="Share on Twitter">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" class="share-icon">
+        </a>
+        <a href="#" id="share-linkedin" target="_blank" aria-label="Share on LinkedIn">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="share-icon">
+        </a>
+      </div>
     </div>
 
-    <!-- Existing footer remains the same -->
+    <!-- Comment Section -->
+    <div class="comments-section">
+      <h3>Comments</h3>
+      <div id="new-comment-container">
+        <input type="text" id="username" placeholder="Your Username (default: Anonymous)">
+        <textarea id="new-comment" placeholder="Write a comment..."></textarea>
+        <button id="submit-comment">Post Comment</button>
+      </div>
+      <ul id="comments-list"></ul>
+    </div>
+  </div>
 
-    <script>
+
+  <!-- Add this section just before the footer -->
+  <div class="container">
+    <div class="related-posts">
+      <h3>Related Posts</h3>
+      <div id="related-posts-grid" class="related-posts-grid">
+        <!-- Related posts will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Existing footer remains the same -->
+
+  <script>
     function getQueryParams() {
-            const params = new URLSearchParams(window.location.search);
-            return {
-                title: params.get("title"),
-                date: params.get("date"),
-                author: params.get("author"),
-                content: params.get("content"),
-                image: params.get("image"),
-                tags: params.get("tags") ? params.get("tags").split(",") : []
-            };
+      const params = new URLSearchParams(window.location.search);
+      return {
+        title: params.get("title"),
+        date: params.get("date"),
+        author: params.get("author"),
+        content: params.get("content"),
+        image: params.get("image"),
+        tags: params.get("tags") ? params.get("tags").split(",") : []
+      };
+    }
+
+    const blog = getQueryParams();
+
+    document.getElementById("blog-title").textContent = blog.title || "Untitled Blog";
+    document.getElementById("blog-date").textContent = blog.date || "Unknown Date";
+    document.getElementById("blog-author").textContent = blog.author || "Unknown Author";
+    document.getElementById("blog-image").src = blog.image || "https://via.placeholder.com/800x400";
+    document.getElementById("blog-content").textContent = decodeURIComponent(blog.content || "No content available.");
+
+    const tagsContainer = document.getElementById("blog-tags");
+    blog.tags.forEach(tag => {
+      const tagElement = document.createElement("span");
+      tagElement.className = "blog-tag";
+      tagElement.textContent = tag;
+      tagsContainer.appendChild(tagElement);
+    });
+
+    // Share Feature
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(blog.title || "Check out this blog post!");
+    document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+    document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+    document.getElementById("share-linkedin").href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+
+    const commentsList = document.getElementById("comments-list");
+    const newCommentInput = document.getElementById("new-comment");
+    const usernameInput = document.getElementById("username");
+    const submitCommentButton = document.getElementById("submit-comment");
+
+    // Generate unique ID
+    function generateUniqueId() {
+      return Date.now().toString() + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Load comments from localStorage
+    function loadComments() {
+      const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
+      renderComments(comments, commentsList);
+    }
+
+    // Save comments to localStorage
+    function saveComments(comments) {
+      localStorage.setItem("blogComments", JSON.stringify(comments));
+    }
+
+    // Find comment by ID recursively
+    function findCommentById(comments, id) {
+      for (let comment of comments) {
+        if (comment.id === id) return comment;
+        if (comment.replies) {
+          const nestedReply = findCommentById(comment.replies, id);
+          if (nestedReply) return nestedReply;
         }
+      }
+      return null;
+    }
 
-        const blog = getQueryParams();
+    // Render comments recursively
+    function renderComments(comments, parentElement, depth = 0) {
+      comments.forEach(comment => {
+        const li = document.createElement("li");
+        li.className = "comment-item";
+        li.style.marginLeft = `${depth * 20}px`; // Indent replies
 
-        document.getElementById("blog-title").textContent = blog.title || "Untitled Blog";
-        document.getElementById("blog-date").textContent = blog.date || "Unknown Date";
-        document.getElementById("blog-author").textContent = blog.author || "Unknown Author";
-        document.getElementById("blog-image").src = blog.image || "https://via.placeholder.com/800x400";
-        document.getElementById("blog-content").textContent = decodeURIComponent(blog.content || "No content available.");
-
-        const tagsContainer = document.getElementById("blog-tags");
-        blog.tags.forEach(tag => {
-            const tagElement = document.createElement("span");
-            tagElement.className = "blog-tag";
-            tagElement.textContent = tag;
-            tagsContainer.appendChild(tagElement);
-        });
-
-        // Share Feature
-        const pageUrl = encodeURIComponent(window.location.href);
-        const pageTitle = encodeURIComponent(blog.title || "Check out this blog post!");
-        document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-        document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
-        document.getElementById("share-linkedin").href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
-
-        const commentsList = document.getElementById("comments-list");
-        const newCommentInput = document.getElementById("new-comment");
-        const usernameInput = document.getElementById("username");
-        const submitCommentButton = document.getElementById("submit-comment");
-
-        // Generate unique ID
-        function generateUniqueId() {
-            return Date.now().toString() + Math.random().toString(36).substr(2, 9);
-        }
-
-        // Load comments from localStorage
-        function loadComments() {
-            const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
-            renderComments(comments, commentsList);
-        }
-
-        // Save comments to localStorage
-        function saveComments(comments) {
-            localStorage.setItem("blogComments", JSON.stringify(comments));
-        }
-
-        // Find comment by ID recursively
-        function findCommentById(comments, id) {
-            for (let comment of comments) {
-                if (comment.id === id) return comment;
-                if (comment.replies) {
-                    const nestedReply = findCommentById(comment.replies, id);
-                    if (nestedReply) return nestedReply;
-                }
-            }
-            return null;
-        }
-
-        // Render comments recursively
-        function renderComments(comments, parentElement, depth = 0) {
-            comments.forEach(comment => {
-                const li = document.createElement("li");
-                li.className = "comment-item";
-                li.style.marginLeft = `${depth * 20}px`; // Indent replies
-
-                li.innerHTML = `
+        li.innerHTML = `
                     <div class="comment-header">
                         <span>${comment.username || "Anonymous"}</span>
                         <span>${comment.timestamp}</span>
@@ -375,178 +379,164 @@
                     <button class="reply-button" data-comment-id="${comment.id}">Reply</button>
                 `;
 
-                const replyButton = li.querySelector(".reply-button");
-                replyButton.addEventListener("click", () => showReplyForm(li, comment.id));
+        const replyButton = li.querySelector(".reply-button");
+        replyButton.addEventListener("click", () => showReplyForm(li, comment.id));
 
-                parentElement.appendChild(li);
+        parentElement.appendChild(li);
 
-                // Recursively render replies with increased depth
-                if (comment.replies && comment.replies.length > 0) {
-                    renderComments(comment.replies, parentElement, depth + 1);
-                }
-            });
+        // Recursively render replies with increased depth
+        if (comment.replies && comment.replies.length > 0) {
+          renderComments(comment.replies, parentElement, depth + 1);
         }
+      });
+    }
 
-        // Show reply form
-        function showReplyForm(parentElement, parentCommentId) {
-            if (parentElement.querySelector(".reply-form")) return;
+    // Show reply form
+    function showReplyForm(parentElement, parentCommentId) {
+      if (parentElement.querySelector(".reply-form")) return;
 
-            const replyForm = document.createElement("div");
-            replyForm.className = "reply-form";
-            replyForm.innerHTML = `
+      const replyForm = document.createElement("div");
+      replyForm.className = "reply-form";
+      replyForm.innerHTML = `
                 <input type="text" placeholder="Your Name (optional)">
                 <textarea placeholder="Write a reply..."></textarea>
                 <button>Post Reply</button>
             `;
 
-            const replyUsernameInput = replyForm.querySelector("input");
-            const replyTextInput = replyForm.querySelector("textarea");
-            const replyButton = replyForm.querySelector("button");
+      const replyUsernameInput = replyForm.querySelector("input");
+      const replyTextInput = replyForm.querySelector("textarea");
+      const replyButton = replyForm.querySelector("button");
 
-            replyButton.addEventListener("click", () => {
-                const replyText = replyTextInput.value.trim();
-                const replyUsername = replyUsernameInput.value.trim() || "Anonymous";
+      replyButton.addEventListener("click", () => {
+        const replyText = replyTextInput.value.trim();
+        const replyUsername = replyUsernameInput.value.trim() || "Anonymous";
 
-                if (replyText) {
-                    const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
-                    const parentComment = findCommentById(comments, parentCommentId);
+        if (replyText) {
+          const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
+          const parentComment = findCommentById(comments, parentCommentId);
 
-                    if (parentComment) {
-                        const reply = {
-                            id: generateUniqueId(),
-                            username: replyUsername,
-                            text: replyText,
-                            timestamp: new Date().toLocaleString(),
-                            replies: []
-                        };
+          if (parentComment) {
+            const reply = {
+              id: generateUniqueId(),
+              username: replyUsername,
+              text: replyText,
+              timestamp: new Date().toLocaleString(),
+              replies: []
+            };
 
-                        parentComment.replies = parentComment.replies || [];
-                        parentComment.replies.push(reply);
+            parentComment.replies = parentComment.replies || [];
+            parentComment.replies.push(reply);
 
-                        saveComments(comments);
-                        commentsList.innerHTML = "";
-                        loadComments();
-                        replyForm.remove();
-                    }
-                }
-            });
-
-            parentElement.appendChild(replyForm);
+            saveComments(comments);
+            commentsList.innerHTML = "";
+            loadComments();
+            replyForm.remove();
+          }
         }
+      });
 
-        // Add a new comment
-        submitCommentButton.addEventListener("click", () => {
-            const commentText = newCommentInput.value.trim();
-            const username = usernameInput.value.trim() || "Anonymous";
+      parentElement.appendChild(replyForm);
+    }
 
-            if (commentText) {
-                const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
+    // Add a new comment
+    submitCommentButton.addEventListener("click", () => {
+      const commentText = newCommentInput.value.trim();
+      const username = usernameInput.value.trim() || "Anonymous";
 
-                comments.push({
-                    id: generateUniqueId(),
-                    username,
-                    text: commentText,
-                    timestamp: new Date().toLocaleString(),
-                    replies: []
-                });
+      if (commentText) {
+        const comments = JSON.parse(localStorage.getItem("blogComments") || "[]");
 
-                saveComments(comments);
-                newCommentInput.value = "";
-                usernameInput.value = "";
-                commentsList.innerHTML = "";
-                loadComments();
-            }
+        comments.push({
+          id: generateUniqueId(),
+          username,
+          text: commentText,
+          timestamp: new Date().toLocaleString(),
+          replies: []
         });
 
-        // Load comments on page load
+        saveComments(comments);
+        newCommentInput.value = "";
+        usernameInput.value = "";
+        commentsList.innerHTML = "";
         loadComments();
- 
-        // Existing script remains the same, and add these functions at the end
+      }
+    });
 
-        // Mock database of blog posts (in a real scenario, this would come from a backend)
-        const blogPosts = [
-            {
-                id: 1,
-                title: "The Future of Artificial Intelligence",
-                author: "Emily Rodriguez",
-                image: "https://via.placeholder.com/300x200?text=AI+Future",
-                tags: ["technology", "ai", "innovation"]
-            },
-            {
-                id: 2,
-                title: "Sustainable Technology Trends",
-                author: "Michael Chen",
-                image: "https://via.placeholder.com/300x200?text=Green+Tech",
-                tags: ["sustainability", "technology", "innovation"]
-            },
-            {
-                id: 3,
-                title: "Cybersecurity in the Digital Age",
-                author: "Sarah Johnson",
-                image: "https://via.placeholder.com/300x200?text=Cybersecurity",
-                tags: ["technology", "security", "internet"]
-            },
-            {
-                id: 4,
-                title: "Machine Learning Breakthroughs",
-                author: "David Kim",
-                image: "https://via.placeholder.com/300x200?text=Machine+Learning",
-                tags: ["ai", "technology", "innovation"]
-            }
-        ];
+    // Load comments on page load
+    loadComments();
 
-        // Function to find related posts based on shared tags
-        function findRelatedPosts(currentPost, allPosts, limit = 3) {
-            // If no tags, return random posts
-            if (!currentPost.tags || currentPost.tags.length === 0) {
-                return allPosts.filter(post => post.id !== currentPost.id).slice(0, limit);
-            }
+    // Existing script remains the same, and add these functions at the end
 
-            // Find posts with matching tags
-            const relatedPosts = allPosts.filter(post => {
-                if (post.id === currentPost.id) return false;
-                return post.tags.some(tag => currentPost.tags.includes(tag));
-            });
+    // Fetch JSON data and initialize related posts rendering
+    fetch('blog.json')
+.then(response => response.json())
+.then(blogPosts => {
+console.log('Fetched blog posts:', blogPosts); // Log fetched data
+const currentPost = getCurrentPost(blogPosts);
+console.log('Current post:', currentPost); // Log current post
+if (currentPost) renderRelatedPosts(currentPost, blogPosts);
+})
+.catch(error => console.error('Error fetching posts:', error));
 
-            // If not enough related posts, fill with random posts
-            while (relatedPosts.length < limit && allPosts.length > relatedPosts.length) {
-                const randomPost = allPosts.find(
-                    post => !relatedPosts.includes(post) && post.id !== currentPost.id
-                );
-                if (randomPost) relatedPosts.push(randomPost);
-            }
+function getCurrentPost(blogPosts) {
+const params = new URLSearchParams(window.location.search);
+const currentPostTitle = params.get('title');
+console.log('Current post title from URL:', currentPostTitle); // Log the URL parameter
 
-            return relatedPosts.slice(0, limit);
-        }
+if (!currentPostTitle) {
+console.error('Error: No title parameter in URL.');
+return null;
+}
 
-        // Render related posts
-        function renderRelatedPosts() {
-            const relatedPostsGrid = document.getElementById("related-posts-grid");
-            const currentPost = getQueryParams();
+const currentPost = blogPosts.find(post => post.title === currentPostTitle);
+if (!currentPost) {
+console.error(`Error: Post with title "${currentPostTitle}" not found in JSON.`);
+return null;
+}
 
-            const relatedPosts = findRelatedPosts(currentPost, blogPosts);
+return currentPost;
+}
 
-            relatedPosts.forEach(post => {
-                const postElement = document.createElement("div");
-                postElement.className = "related-post";
-                postElement.innerHTML = `
-                    <img src="${post.image}" alt="${post.title}" class="related-post-image">
-                    <h4 class="related-post-title">${post.title}</h4>
-                    <p class="related-post-author">By ${post.author}</p>
-                `;
+function renderRelatedPosts(currentPost, blogPosts) {
+const relatedPostsGrid = document.getElementById("related-posts-grid");
+if (!relatedPostsGrid) {
+console.error("Error: #related-posts-grid element not found in HTML.");
+return;
+}
 
-                // Add click handler to navigate to post (you'd customize the URL generation)
-                postElement.addEventListener("click", () => {
-                    const postUrl = `?title=${encodeURIComponent(post.title)}&author=${encodeURIComponent(post.author)}&image=${encodeURIComponent(post.image)}&tags=${post.tags.join(",")}`;
-                    window.location.href = postUrl;
-                });
+const relatedPosts = findRelatedPosts(currentPost, blogPosts);
+console.log('Related posts:', relatedPosts); // Log related posts
 
-                relatedPostsGrid.appendChild(postElement);
-            });
-        }
+if (relatedPosts.length === 0) {
+relatedPostsGrid.innerHTML = `<p>No related posts found.</p>`;
+return;
+}
 
-        // Call renderRelatedPosts after existing page load functions
-        renderRelatedPosts();
-    </script>
+relatedPosts.forEach(post => {
+const postElement = document.createElement("div");
+postElement.className = "related-post";
+postElement.innerHTML = `
+<img src="${post.image}" alt="${post.title}" class="related-post-image">
+<div class="related-post-content">
+  <h4 class="related-post-title">${post.title}</h4>
+  <div class="related-post-meta">
+    <div class="related-post-author">
+      <img src="${post.author.avatar}" alt="${post.author.name}">
+      <span>${post.author.name}</span>
+    </div>
+    <span>${post.date}</span>
+  </div>
+</div>
+`;
+
+postElement.addEventListener("click", () => {
+window.location.href = post.link;
+});
+
+relatedPostsGrid.appendChild(postElement);
+});
+} 
+</script>
 </body>
+
 </html>
