@@ -7,6 +7,8 @@
   <title>Blog Post</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1816934530564614"
+     crossorigin="anonymous"></script>
   <style>
     /* Existing styles... (keep all previous CSS) */
     :root {
@@ -33,6 +35,41 @@
       background: white;
       border-radius: 0.75rem;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      /* Transparent white */
+      backdrop-filter: blur(10px);
+      /* Creates the glass effect */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      /* Subtle border for definition */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Add some shadow for depth */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      /* Smooth transition */
+      margin: 20px;
+    }
+
+    .navbar a {
+      color: #222;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: var(--secondary-color);
     }
 
     .blog-header {
@@ -237,7 +274,15 @@
 </head>
 
 <body>
-  <!-- Existing body content remains the same -->
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact</a>
+  </div>
+
   <div class="container">
     <header class="blog-header">
       <h1 id="blog-title">Loading...</h1>
@@ -469,53 +514,53 @@
 
     // Fetch JSON data and initialize related posts rendering
     fetch('blog.json')
-.then(response => response.json())
-.then(blogPosts => {
-console.log('Fetched blog posts:', blogPosts); // Log fetched data
-const currentPost = getCurrentPost(blogPosts);
-console.log('Current post:', currentPost); // Log current post
-if (currentPost) renderRelatedPosts(currentPost, blogPosts);
-})
-.catch(error => console.error('Error fetching posts:', error));
+      .then(response => response.json())
+      .then(blogPosts => {
+        console.log('Fetched blog posts:', blogPosts); // Log fetched data
+        const currentPost = getCurrentPost(blogPosts);
+        console.log('Current post:', currentPost); // Log current post
+        if (currentPost) renderRelatedPosts(currentPost, blogPosts);
+      })
+      .catch(error => console.error('Error fetching posts:', error));
 
-function getCurrentPost(blogPosts) {
-const params = new URLSearchParams(window.location.search);
-const currentPostTitle = params.get('title');
-console.log('Current post title from URL:', currentPostTitle); // Log the URL parameter
+    function getCurrentPost(blogPosts) {
+      const params = new URLSearchParams(window.location.search);
+      const currentPostTitle = params.get('title');
+      console.log('Current post title from URL:', currentPostTitle); // Log the URL parameter
 
-if (!currentPostTitle) {
-console.error('Error: No title parameter in URL.');
-return null;
-}
+      if (!currentPostTitle) {
+        console.error('Error: No title parameter in URL.');
+        return null;
+      }
 
-const currentPost = blogPosts.find(post => post.title === currentPostTitle);
-if (!currentPost) {
-console.error(`Error: Post with title "${currentPostTitle}" not found in JSON.`);
-return null;
-}
+      const currentPost = blogPosts.find(post => post.title === currentPostTitle);
+      if (!currentPost) {
+        console.error(`Error: Post with title "${currentPostTitle}" not found in JSON.`);
+        return null;
+      }
 
-return currentPost;
-}
+      return currentPost;
+    }
 
-function renderRelatedPosts(currentPost, blogPosts) {
-const relatedPostsGrid = document.getElementById("related-posts-grid");
-if (!relatedPostsGrid) {
-console.error("Error: #related-posts-grid element not found in HTML.");
-return;
-}
+    function renderRelatedPosts(currentPost, blogPosts) {
+      const relatedPostsGrid = document.getElementById("related-posts-grid");
+      if (!relatedPostsGrid) {
+        console.error("Error: #related-posts-grid element not found in HTML.");
+        return;
+      }
 
-const relatedPosts = findRelatedPosts(currentPost, blogPosts);
-console.log('Related posts:', relatedPosts); // Log related posts
+      const relatedPosts = findRelatedPosts(currentPost, blogPosts);
+      console.log('Related posts:', relatedPosts); // Log related posts
 
-if (relatedPosts.length === 0) {
-relatedPostsGrid.innerHTML = `<p>No related posts found.</p>`;
-return;
-}
+      if (relatedPosts.length === 0) {
+        relatedPostsGrid.innerHTML = `<p>No related posts found.</p>`;
+        return;
+      }
 
-relatedPosts.forEach(post => {
-const postElement = document.createElement("div");
-postElement.className = "related-post";
-postElement.innerHTML = `
+      relatedPosts.forEach(post => {
+        const postElement = document.createElement("div");
+        postElement.className = "related-post";
+        postElement.innerHTML = `
 <img src="${post.image}" alt="${post.title}" class="related-post-image">
 <div class="related-post-content">
   <h4 class="related-post-title">${post.title}</h4>
@@ -529,14 +574,14 @@ postElement.innerHTML = `
 </div>
 `;
 
-postElement.addEventListener("click", () => {
-window.location.href = post.link;
-});
+        postElement.addEventListener("click", () => {
+          window.location.href = post.link;
+        });
 
-relatedPostsGrid.appendChild(postElement);
-});
-} 
-</script>
+        relatedPostsGrid.appendChild(postElement);
+      });
+    }
+  </script>
 </body>
 
 </html>
